@@ -1,0 +1,66 @@
+html,body{
+    margin: 0;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+body{background-color: lavender;}
+.logo{
+margin-bottom: 0px;
+font-size: 20px;
+ text-align: center;
+ 
+}
+.nav-bar{
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 100px;
+    min-height: 2em;
+    display: table-cell;
+    vertical-align: middle
+}
+.nav-bar ul{
+    list-style: none;
+    margin: 0; 
+    padding-left: 0; 
+}
+.nav-bar a{
+    text-decoration: none;
+    color: black;
+}
+.nav-bar li{
+    display: inline-block;
+    padding-right: 5px;
+    text-align: center;
+}
+header{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: rgb(92, 92, 92);
+}
+.head-image img{ 
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+      
+
+}
+.aliens img{height: 300px;
+
+}
+#heroes h3{
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: darkgreen;
+}
+.nth li:nth-child(2n){
+    background-color: rgb(6, 126, 56);
+    
+}
+.nth li:nth-child(odd){
+    background-color: rgb(8, 24, 15);
+    color: darkgrey;
+    
+}
