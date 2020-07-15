@@ -298,5 +298,21 @@ function makeClone(obj) {
 
 
 
+//Знайти найменше число з 3 з допомогою if
+function  min3Nums(a=0,b=0,c=0) {
+    let min=a;
+    if (b<min) min=b;
+    if(c<min) min=c;
+    return min;
+}
 
 
+//Знайти найбільше число з 3 з допомогою if
+function  max3Nums(a=0,b=0,c=0) {
+    let max=a;
+    if (b>max) max=b;
+    if(c>max) max=c;
+    return max;
+}
+console.log(min3Nums(7,4,6));
+console.log(max3Nums(2,6,4));
