@@ -26,9 +26,9 @@ class Tag {
     }
 }
 
-class Atributes {
-    constructor(TitleOfAttr,action) {
-        this.titleOfAttr=TitleOfAttr;
+function Atributes(titleOfAttr,action) {
+    {
+        this.titleOfAttr=titleOfAttr;
         this.action=action;
     }
 
@@ -195,13 +195,10 @@ class Prince {constructor(name,age,sizeOfFindedShoes) {
 
 let girlsNames=['Ann','Maria','Lina','Olga','Emma','Olivia','Ava','Sophia','Charlotte','Amelia'];
 let boysNames=['Liam','Noah','William','James','Oliver','Benjamin','Dmytro','Ivan'];
-let legSize=[];
-let shoesSize=[];
-let age=[];
-for (let i = 1; i <20; i++) {
-   legSize[0]=34;
-   shoesSize[0]=34;
-   age[0]=18;
+let legSize=[34];
+let shoesSize=[34];
+let age=[18];
+for (let i = 1; i <10; i++) {
    age[i]=age[i-1]+1
     legSize[i]=legSize[i-1]+1;
     shoesSize[i]=shoesSize[i-1]+1;
