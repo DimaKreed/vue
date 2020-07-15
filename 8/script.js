@@ -277,9 +277,23 @@ console.log(isNumberDegreeOf2(787688));
 let lotOfLevelArray=[1,3, ['Hello', 'Wordd', [9,6,1]], ['oops'], 9] ;
 console.log(makingOneLevelArray(lotOfLevelArray));
 
+//2) Deep Copy
+// реалізувати глибоке копіювання обєкту за допомогою рекурсій
 
-
-
+function makeClone(obj) {
+    let clone = {}; // новий обєкт
+    for (let prop in obj)
+    {
+        if (obj.hasOwnProperty(prop)) // Тільки власні ключі
+        {
+            if ("object"===typeof obj[prop]) // Якщо ключ це обєкт
+                clone[prop] = makeClone(obj[prop]); //Знову посилаємо на копіювання
+            else
+                clone[prop] = obj[prop]; // Якщо ні- то копіюємо
+        }
+    }
+    return clone;
+}
 
 
 
