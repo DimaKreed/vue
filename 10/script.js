@@ -226,7 +226,7 @@ cars2=[
     {producer:'nissan',power:190,price:3450,yearOfProduction:2008,owner:{name:'Ruslan',age:29,drivingExp:9}},
     {producer:'honda',power:174,price:2200,yearOfProduction:2009,owner:{name:'Oksana',age:27,drivingExp:5}},
 ]
-//Далі необхідно рати кожну другу машинку (цикл з кроком в 2), та робити їй підвищення потужності двигуна на 10% та ціну на 5%
+//Далі необхідно брати кожну другу машинку (цикл з кроком в 2), та робити їй підвищення потужності двигуна на 10% та ціну на 5%
 let carsAfterUpdate=cars2.map((value, index) =>{
     if(index%2===0)
     {
