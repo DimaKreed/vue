@@ -95,6 +95,30 @@ console.log(usersWithId);
 //- відсортувати його за індентифікатором
 console.log(usersWithId.sort((a, b) => a.id - b.id));
 
+//-- наисать функцию калькулятора с 2мя числами и колбеком
+let x;
+function calculator2Nums(a,b,callback) {
+  x= callback(a, b);
+}
+//example of usage
+calculator2Nums(12,45,function (a,b) {
+return a+b*2;
+})
+console.log(x);
+
+//-- наисать функцию калькулятора с 3мя числами и колбеком
+let y;
+function calculator3Nums(a,b,c,callback) {
+    y=callback(a,b,c);
+}
+
+//example of usage
+calculator3Nums(1,4,5,function (a,b,c,) {
+    return (a+b-c*3)*b;
+});
+
+console.log(y);
+
 
 
 
