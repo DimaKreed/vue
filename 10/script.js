@@ -91,28 +91,20 @@ console.log(usersWithId);
 console.log(usersWithId.sort((a, b) => a.id - b.id));
 
 //-- наисать функцию калькулятора с 2мя числами и колбеком
-let x;
-function calculator2Nums(a,b,callback) {
-  x= callback(a, b);
-}
+let calculator2Nums=(a,b,callback) =>callback(a, b);
+
+
 //example of usage
-calculator2Nums(12,45,function (a,b) {
-return a+b*2;
-})
-console.log(x);
+console.log(calculator2Nums(12, 4, (a, b) => a + b * 2));
 
 //-- наисать функцию калькулятора с 3мя числами и колбеком
-let y;
-function calculator3Nums(a,b,c,callback) {
-    y=callback(a,b,c);
-}
+
+ let calculator3Nums=(a,b,c,callback)=>callback(a,b,c);
+
 
 //example of usage
-calculator3Nums(1,4,5,function (a,b,c,) {
-    return (a+b-c*3)*b;
-});
+console.log(calculator3Nums(1, 4, 5, (a, b, c,) => (a + b - c * 3) * b));
 
-console.log(y);
 
 //Відфільтрувати масив за наступними крітеріями :
 let cars = [
@@ -246,7 +238,7 @@ let carsAfterUpdate=cars2.map((value, index) =>{
     return value;
 } )
 //Після того зробити перевірку досвіду ВСІХ наших водіїв. Якщо досвід водія менший за 5 років, але його вік більший за 25, то необідно відправити його на курси підвищення кваліфікації, що збільшить йому досвід на 1 рік.
-carsAfterUpdate.forEach((value, index) =>{if (value.owner.drivingExp<5&&value.owner.age>25){console.log(value.owner.name+" is going for cources"); value.owner.drivingExp+=1;}});
+carsAfterUpdate.forEach((value) =>{if (value.owner.drivingExp<5&&value.owner.age>25){console.log(value.owner.name+" is going for cources"); value.owner.drivingExp+=1;}});
 //Також спробуйте порахувати суму, яку потрібно потратити для покупки всіх цих авто в циклі
 let price=carsAfterUpdate.reduce((accum, currentValue) => accum+currentValue.price,0);
 console.log(price);
@@ -255,10 +247,20 @@ console.log(price);
 // Входные данные: arr — массив целых чисел значения которых по модулю не больше 10. Размер массива не более 10 элементов.
 // Вывод: наибольший и наименьший индекс в массиве заданного элемента. Если такого элемента нет в массиве, выведите -1.
 let Arr = [1, 2, 3, 4, 4, 4, 4, 7, 7, 9, 14];
+let index=(key,arr)=>{
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i]===key) return i;
+    } return -1;}
+let lastIndex=(key,arr)=>{
+    for (let i = arr.length - 1; i >= 0; i--) {
+        if(arr[i]===key) return i;
+    } return -1;}
+
+
 
 function minMaxIndex(arr) {
    let key=+prompt("Enter key",1);
-    return 'MinIndex = '+ arr.indexOf(key)+', MaxIndex = '+arr.lastIndexOf(key);
+    return 'MinIndex = '+ index(key,arr)+', MaxIndex = '+lastIndex(key,arr);
 }
 console.log(minMaxIndex(Arr));
 
