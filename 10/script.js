@@ -119,6 +119,55 @@ calculator3Nums(1,4,5,function (a,b,c,) {
 
 console.log(y);
 
-
-
+//Відфільтрувати масив за наступними крітеріями :
+let cars = [
+    {producer:"subaru",model: "wrx",year: 2010, color:"blue",type: "sedan",engine: "ej204x",volume: 2,power: 400},
+    {producer:"subaru",model: "legacy",year: 2007, color:"silver",type: "sedan",engine: "ez30",volume: 3,power: 250},
+    {producer:"subaru",model: "tribeca",year: 2011, color:"white",type: "jeep",engine: "ej20",volume: 2,power: 300},
+    {producer:"subaru",model: "leone",year: 1998, color:"yellow",type: "sedan",engine: "ez20x",volume: 2,power: 140},
+    {producer:"subaru",model: "impreza",year: 2014, color:"red",type: "sedan",engine: "ej204x",volume: 2,power: 200},
+    {producer:"subaru",model: "outback",year: 2014, color:"red",type: "hachback",engine: "ej204",volume: 2,power: 165},
+    {producer:"bmw",model: "115",year: 2013, color:"red",type: "hachback",engine: "f15",volume: 1.5,power: 120},
+    {producer:"bmw",model: "315",year: 2010, color:"white",type: "sedan",engine: "f15",volume: 1.5, power: 120},
+    {producer:"bmw",model: "650",year: 2009, color:"black",type: "coupe",engine: "f60",volume: 6,power: 350},
+    {producer:"bmw",model: "320",year: 2012, color:"red",type: "sedan",engine: "f20",volume: 2,power: 180},
+    {producer:"mercedes",model: "e200",year: 1990, color:"silver",type: "sedan",engine: "eng200",volume: 2,power: 180},
+    {producer:"mercedes",model: "e63",year: 2017, color:"yellow",type: "sedan",engine: "amg63",volume:3,power: 400},
+    {producer:"mercedes",model: "c250",year: 2017, color:"red",type: "sedan",engine: "eng25",volume: 2.5,power: 230} ];
+//- двигун більше 3х літрів
+let volumeMore3 = cars.filter(value => value.volume>3);
+console.log(volumeMore3);
+//- двигун = 2л
+let volume2=cars.filter(value => value.volume===2);
+console.log(volume2);
+//- виробник мерс
+let merc=cars.filter(value => value.producer==="mercedes")
+console.log(merc);
+//- двигун більше 3х літрів + виробник мерседес
+let filter = cars.filter(value => value.volume>3&&value.producer==='mercedes');
+console.log(filter);
+//- двигун більше 3х літрів + виробник субару
+let filter1 = cars.filter(value => value.engine>3&&value.producer==='subaru');
+console.log(filter1);
+//- сили більше ніж 300
+let filter2 = cars.filter(value => value.power>300);
+console.log(filter2);
+//- сили більше ніж 300 + виробник субару
+let filter3 = cars.filter(value => value.power>300&&value.producer==='subaru');
+console.log(filter3);
+//- мотор серіі ej
+let filter4 = cars.filter(value => value.engine.startsWith('ej'));
+console.log(filter4);
+//- сили більше ніж 300 + виробник субару + мотор серіі ej
+let filter5 = cars.filter(value => value.power>300&&value.producer==='subaru'&&value.engine.startsWith('ej'));
+console.log(filter5);
+//- двигун меньше 3х літрів + виробник мерседес
+let filter6 = cars.filter(value => value.volume<3&&value.producer==='mercedes');
+console.log(filter6);
+//- двигун більше 2л + сили більше 250
+let filter7 = cars.filter(value => value.volume>2&&value.power>250);
+console.log(filter7);
+//- сили більше 250  + виробник бмв
+let filter8 = cars.filter(value => value.power>250&&value.producer==='bmw');
+console.log(filter8);
 
