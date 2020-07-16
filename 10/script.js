@@ -38,7 +38,7 @@ let strSort = str2.sort((a, b) => (a.toLowerCase()<b.toLowerCase())?-1:1);
 console.log(strSort);
 
 //-- отсортировать его по алфавиту  в нисходящем порядке.
-let strSortReverse = str2.sort((a, b) => (a<b)?-1:1)
+let strSortReverse = str2.sort((a, b) => (a.toLowerCase()>b.toLowerCase())?-1:1)
 console.log(strSortReverse);
 
 //-- отфильтровать слова длиной менее 4х символов
@@ -247,20 +247,19 @@ console.log(price);
 // Входные данные: arr — массив целых чисел значения которых по модулю не больше 10. Размер массива не более 10 элементов.
 // Вывод: наибольший и наименьший индекс в массиве заданного элемента. Если такого элемента нет в массиве, выведите -1.
 let Arr = [1, 2, 3, 4, 4, 4, 4, 7, 7, 9, 14];
-let index=(key,arr)=>{
-    for (let i = 0; i < arr.length; i++) {
-        if(arr[i]===key) return i;
-    } return -1;}
-let lastIndex=(key,arr)=>{
-    for (let i = arr.length - 1; i >= 0; i--) {
-        if(arr[i]===key) return i;
-    } return -1;}
+
 
 
 
 function minMaxIndex(arr) {
-   let key=+prompt("Enter key",1);
-    return 'MinIndex = '+ index(key,arr)+', MaxIndex = '+lastIndex(key,arr);
+    let key=+prompt("Enter key",1);
+    let index=-1;
+    let lastIndex=-1;
+    for (let i = 0; i < arr.length; i++) {
+        if(key===arr[i]) lastIndex=i;
+        if(key===arr[i]&&index===-1) index=i;
+        }
+    return 'MinIndex = '+ index+', MaxIndex = '+lastIndex;
 }
 console.log(minMaxIndex(Arr));
 
