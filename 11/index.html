@@ -2,9 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>My homework</title>
+    <style>
+
+
+        .myClass{
+        height:  100px;
+        width: 100px;
+        background-color: #d43f3a
+    }
+        .hide{
+            display: none;
+        }
+
+        td{
+            border: solid 2px black;
+        }
+
+#coments{
+    margin: 20px;
+}
+    </style>
 </head>
+
+
 <body>
+
+<div id="text" class="myClass">some</div>
+<form name="form1">
+    <input type="button" value="Press to hide text-div" name="hideButton">
+    <input type="button" value="Press to hide this button" name="hideSelf">
+    <div>
+        <input type="text" name="ageOfPerson" placeholder="Enter your age" >
+        <br><input type="button" value="This is my age" name="ageButton">
+    </div>
+    <div id="menu">
+        <h1 >Press to show/hide menu</h1>
+        <ul class="hide">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+<div id="coments"></div>
+</form>
+
+<div>
+    <form name="form2">
+    <input name="ch" type="checkbox" checked>First<br>
+    <input name="ch" type="checkbox">Second<br>
+</form>
+
+    <form name="form3">
+        <input type="text" placeholder="enter text" name="text1"><br>
+        <input type="radio" name="rad">One more<br>
+    </form>
+    <input type="button" id="buttonInfo" name="getInfo" value="press to get info from forms">
+</div>
+
+
+<div>
+    <form name="tableForm">
+        <input type="text" placeholder="enter number of rows" name="rows"><br>
+        <input type="text" placeholder="enter number of columns" name="columns"><br>
+        <input type="text" placeholder="enter text inside" name="textInside"><br>
+        <input type="button"  name="createTable" value="press to create table">
+
+    </form>
+</div>
+
+
+    <img id="karusel" src="img/1.jpg">
+    
+<form name="obscene">
+    <input type="text" name="checkForObscene" placeholder="Enter some text"><br>
+    <input type="button" value="check string for obscene vocabulary" name="check">
+</form>
+
+<div id="users"></div>
+<form name="users">
+    <input type="checkbox" name="checkFalse" >Users with false status<br>
+    <input type="checkbox" name="check29">Users 29+<br>
+    <input type="checkbox" name="checkKyiv">Users which lives in Kyiv<br>
+
+</form>
+
+
+<textarea id="area" style="width: 200px; height: 100px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, quo?</textarea>
+
+
+
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
