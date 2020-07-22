@@ -175,14 +175,11 @@ users.innerText=JSON.stringify(usersWithAddress);
 
 
 isFalse=(array)=>{
-    let newArr=(checkFalse.checked)?array.filter(a =>a.status === false):JSON.parse(JSON.stringify(array));
-return newArr;}
+    return (checkFalse.checked) ? array.filter(a => a.status === false) : JSON.parse(JSON.stringify(array));}
 is29=(array)=>{
-    let newArr=(check29.checked)?array.filter(a =>a.age>29):JSON.parse(JSON.stringify(array));
-    return newArr;}
+    return (check29.checked) ? array.filter(a => a.age > 29) : JSON.parse(JSON.stringify(array));}
 isKyiv=(array)=>{
-    let newArr=(checkKyiv.checked)?array.filter(a =>a.address.city==='Kyiv'):JSON.parse(JSON.stringify(array));
-    return newArr;}
+    return (checkKyiv.checked) ? array.filter(a => a.address.city === 'Kyiv') : JSON.parse(JSON.stringify(array));}
 
 
 
@@ -205,7 +202,6 @@ area.onselect = function() {
         return;}
 
         let selected = area.value.slice(area.selectionStart, area.selectionEnd);
-    console.log(selected);
      area.setRangeText(` *Мене виділили: ${selected} * `,area.selectionStart,area.selectionEnd,"end");
 }
 
