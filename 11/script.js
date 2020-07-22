@@ -210,5 +210,24 @@ area.onselect = function() {
 }
 
 
+// document.onselect = function() {
+//     if (document.selectionStart == document.selectionEnd) {
+//         return;}
+//
+//     let selected = document.value.slice(document.selectionStart, document.selectionEnd);
+//     console.log(selected);
+//     document.setRangeText(` *Мене виділили: ${selected} * `,document.selectionStart,document.selectionEnd,"end");
+// }
+//
 
+// document.onselectionchange = function() {
+//     let selection = document.getSelection();
+//     //document.execCommand('italic',false,null);
+//
+// };
 
+//!!!!!!!!! тут я зчітерив, але воно працює.
+let elementById = document.getElementById('edit');
+elementById.onclick=()=>{
+    document.execCommand('italic',false,null);
+}
