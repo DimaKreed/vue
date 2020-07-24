@@ -1,0 +1,24 @@
+function isAnagram(str1,str2) {
+    return (str1.split("").sort((a, b) => (a < b) ? -1 : 1).join("") === str2.split("").sort((a, b) => (a < b) ? -1 : 1).join(""));
+}
+
+function isSquare(nums1,nums2){
+     if (nums1.length!==nums2.length) return false;
+    else {
+         let counter=0;
+         for (let i = 0; i < nums1.length; i++) {
+             if (nums1.map(value=>value*value).sort((a, b) => a-b)[i]===nums2.sort((a, b) => a-b)[i]) counter++;
+         }
+         return (counter===nums1.length);
+         }
+     }
+
+console.log(isSquare([1,2,3],[9,1,4]));
+console.log(isSquare([2,1,2],[1,1,4]));
+console.log(isSquare([1,2,3,5],[25,9,1,4,4]));
+
+
+
+console.log(isAnagram('dima','aimd'));
+console.log(isAnagram('okten','token'));
+console.log(isAnagram('test','rest'));
