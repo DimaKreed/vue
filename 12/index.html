@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my homework(local storage)</title>
+
+    <style>
+        .hide{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<textarea name="text" id="saveThisText" style="width: 200px; height: 150px;"></textarea>
+<br><br>
+<form name="form1">
+    <input type="text" name="text"><br>
+    <textarea name="area"  cols="30" rows="10"></textarea> <br>
+   <div id="check">
+       <input type="checkbox" name="check">text1 <br>
+       <input type="checkbox" name="check">text2 <br>
+       <input type="checkbox" name="check">text3 <br>
+   </div>
+    <div id="radio">
+        <input type="radio" name="radio"> this <br>
+        <input type="radio" name="radio">that <br>
+    </div>
+
+    <select name="language" size="4">
+        <option value="JS" selected="selected">JavaScript</option>
+        <option value="Java">Java</option>
+        <option value="CS">C#</option>
+        <option value="CPP">C++</option>
+    </select>
+</form>
+<br>
+<br>
+<form action="" name="formAreaWithVersions">
+    <input type="button" value="<=" name="leftArrow">
+    <input type="button" value="=>" name="rightArrow">
+    <input type="button" value="Save" name="saveButton">
+    <br><textarea name="areaVersions" cols="30" rows="10"></textarea>
+</form>
+
+<form name="contacts">
+    <h1>CONTACTS</h1>
+    <select name="contactsList" >
+    </select><br>
+
+    <input type="button" value="Add" name="add">
+    <input type="button" value="Edit" name="edit">
+    <input type="button" value="Delete" name="delete">
+<div id="inputs" class="hide">
+    <section id="focus" tabindex="-1">
+    <br><input type="name" onkeyup="checkParams()" placeholder="Введіть ПІБ" name="contactName"><br>
+    <input type="number"  onkeyup="checkParams()" placeholder="Номер телефону" name="phoneNumber"><br>
+    <input type="email" placeholder="e-mail" name="eMail" ><br>
+    <input type="text" placeholder="Фірма" name="firm" ><br>
+    <input type="text" placeholder="Відділ" name="department" ><br>
+    <input type="date" placeholder="День народження" name="dateOfBirth" ><br>
+    <input type="button" value="Save" name="save" disabled>
+     </section>
+</div>
+
+
+</form>
+
+
+<script src="script.js"></script>
+</body>
+</html>
