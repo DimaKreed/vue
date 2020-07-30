@@ -26,9 +26,12 @@ console.log(isAnagram('test','rest'));
 
 
 
+// function sleep(ms){
+//   return new Promise(resolve => setTimeout(resolve,ms));
+// }
 
 
- function printMachine(string)
+ async function printMachine(string)
  {
    let p=document.createElement("p");
    document.body.appendChild(p);
@@ -37,24 +40,33 @@ console.log(isAnagram('test','rest'));
    let res=p.innerText;
    let i=0;
 
-   function type()
-   {
-     if(i<string.length)
-     {
-       res+=string[i];
-       p.innerText=res;
-       i++;
-       setTimeout(type,100+Math.random()*400)
-     }
-   }
-
-   type();
-
-
+   while (i<string.length)
+{
+  res+=string[i];
+  p.innerText=res;
+  i++;
+  await new Promise(resolve => setTimeout(resolve,100+Math.random()*400));
+    //await sleep(100+Math.random()*400)
+}
 
  }
 
+(async  () =>
+  {
+    await printMachine('Hi I am Dima ')
+    await printMachine("And I'm studying hard on JS courses, because I wanna be a cool developer");
+  }
+)()
+
+//f();
 
 
- printMachine('Hi I am Dima ')
-//printMachine("And I'm studying hard on JS courses, because I wanna be a cool developer");
+
+
+// while (i<string.length)
+// {
+//   res+=string[i];
+//   p.innerText=res;
+//   i++;
+//   await wait(100+Math.random()*400)
+// }
