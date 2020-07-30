@@ -58,15 +58,7 @@ console.log(isAnagram('test','rest'));
   }
 )()
 
-//f();
 
 
 
 
-// while (i<string.length)
-// {
-//   res+=string[i];
-//   p.innerText=res;
-//   i++;
-//   await wait(100+Math.random()*400)
-// }
