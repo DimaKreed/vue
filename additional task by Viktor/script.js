@@ -28,7 +28,7 @@ console.log(isAnagram('test','rest'));
 
 
 
- async function printMachine(string)
+ function printMachine(string)
  {
    let p=document.createElement("p");
    document.body.appendChild(p);
