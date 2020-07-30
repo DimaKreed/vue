@@ -22,3 +22,39 @@ console.log(isSquare([1,2,3,5],[25,9,1,4,4]));
 console.log(isAnagram('dima','aimd'));
 console.log(isAnagram('okten','token'));
 console.log(isAnagram('test','rest'));
+
+
+
+
+
+
+ async function printMachine(string)
+ {
+   let p=document.createElement("p");
+   document.body.appendChild(p);
+
+   string=string.split('');
+   let res=p.innerText;
+   let i=0;
+
+   function type()
+   {
+     if(i<string.length)
+     {
+       res+=string[i];
+       p.innerText=res;
+       i++;
+       setTimeout(type,100+Math.random()*400)
+     }
+   }
+
+   type();
+
+
+
+ }
+
+
+
+ printMachine('Hi I am Dima ')
+//printMachine("And I'm studying hard on JS courses, because I wanna be a cool developer");
