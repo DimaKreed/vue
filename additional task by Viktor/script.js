@@ -35,11 +35,9 @@ console.log(isAnagram('test','rest'));
  {
    let p=document.createElement("p");
    document.body.appendChild(p);
-
    string=string.split('');
    let res=p.innerText;
    let i=0;
-
    while (i<string.length)
 {
   res+=string[i];
