@@ -1,6 +1,8 @@
 <template>
 <div>
-    <AddTodo @addTask="add"/>
+    <AddTodo
+            :lengthToDo="toDoList.length"
+            @addTask="add"/>
 
     <ToDoList
             :toDo="toDoList"

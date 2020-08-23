@@ -16,18 +16,23 @@
     data(){
         return{
           text:'',
-          show:true,
         }
     },
 
-    watch:{
-      text(){
-        if(this.$parent.toDoList.length<=10)
-        {this.show=true}
+
+    props:{
+      lengthToDo:{
+        type:String,
+        required:true,
       }
     },
 
-
+        computed:{
+      show(){
+        return this.lengthToDo>=10?false:true
+      }
+        }
+,
     methods:{
       add(){
         if (this.text.length>0)
@@ -36,8 +41,6 @@
           this.$emit('addTask',this.text)
 
         }
-        if(this.$parent.toDoList.length>=10)
-        {this.show=false}
 
       },
 
