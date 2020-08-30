@@ -2,37 +2,29 @@
     <div>
         <input type="text" v-model="task.task" placeholder="Item to do">
         <input type="text" v-model="task.description" placeholder="Description">
-        <b-button  @click="addTask" >Add new "ToDo" Task</b-button>
+        <b-button  @click="add" >Add new "ToDo" Task</b-button>
+
         <ul v-for="(task,i) in toDoList" :key="i">
-            <div v-show="!task.edit_mode">
-                <li
-                        @dblclick="edit(task)"
-                >{{i+1}}. Task:{{task.toDo.task}}</li>
-
-                <li
-                        @dblclick="edit(task)"
-                >Description:{{task.toDo.description}}</li>
-                <b-button @click=" remove(task.id) ">Delete</b-button>
-
+            <div @dblclick="ActivateEditMode(task)"
+                 v-if="!task.edit_mode">
+                <li>{{i+1}}. Task:{{task.task}} </li>
+                <li> Description:{{task.description}} </li>
+                <b-button @click="removeToDo(task.id)">Delete</b-button>
             </div>
-
 
             <div v-show="task.edit_mode"
                  @keyup.enter="update(task)">
 
-              <span >Task:</span>  <input
-                        v-model="editTask"
-                        type="text"><br>
+                <span >{{i+1}}.Task:</span>  <input
+                    v-model="editTask"
+                    type="text"><br>
 
-               <span>Description</span> <input
-                        v-model="editDescription"
-                        type="text"><br>
+                <span>Description</span> <input
+                    v-model="editDescription"
+                    type="text"><br>
                 <b-button @click=" update(task) ">Update</b-button>
 
             </div>
-
-
-
 
             <hr>
         </ul>
@@ -40,6 +32,19 @@
 </template>
 
 <script>
+  import {
+    ADD_TODO,
+    LIST_OF_TODOS,
+    GET_LIST_FROM_API,
+    REMOVE,
+    CHANGE_EDIT_MODE_IN_TRUE,
+    UPDATE_LIST_IN_API
+  } from "../../../store/MyProjects/types";
+  import {MyProjectsModule} from "../../../store";
+  import {createNamespacedHelpers} from 'vuex';
+
+  const{mapActions}=createNamespacedHelpers(MyProjectsModule)
+  const{mapGetters}=createNamespacedHelpers(MyProjectsModule);
   export default {
     name: "MyProjects",
 
@@ -52,81 +57,67 @@
         },
         editTask:'',
         editDescription:'',
-
-
-        toDoList:[],
       }
     },
 
     computed:{
-
+      ...mapGetters({
+        toDoList:LIST_OF_TODOS
+      })
     },
 
     methods:{
+      ...mapActions({
+        addTask:ADD_TODO,
+        REMOVE,
+        UPDATE_LIST_IN_API
 
-       getItems(){
-         this.$http.get('toDo.json')
-          .then(res=>{
-            return res.json()
-          } ).then(res=>{
+      }),
 
-            this.toDoList=[];
-
-           for(let items in res)
-           {
-             this.toDoList.push({id:items,toDo:res[items]})
-           }
-
-         })
-      },
-
-
-      async addTask(){
-
-          await  this.$http.post('toDo.json',this.task)
-
+      async add(){
+        try {
+          await this.addTask(this.task)
           this.task.task='';
           this.task.description='';
-          this.id++;
-
-          this.getItems();
+        }
+        catch (e) {
+          console.log(e);
+        }
       },
 
-       async remove(id)
-       {
-          await this.$http.delete(`https://myvueproject-2080c.firebaseio.com/toDo/${id}.json`);
-          this.getItems();
-        },
+      async removeToDo(id){
+        try {
+          await this.REMOVE(id);
+        }
+        catch (e) {
+          console.log(e);
+        }
+      },
 
-      edit(task){
-         this.$set(task, 'edit_mode', true)
-        this.editTask=task.toDo.task;
-        this.editDescription=task.toDo.description;
+      async ActivateEditMode(task){
+        await this.$store.commit(`${MyProjectsModule}/${CHANGE_EDIT_MODE_IN_TRUE}`,task.id);
+        this.editTask=task.task;
+        this.editDescription=task.description;
 
       },
 
-       async update(task){
-         await this.$http.put(`toDo/${task.id}.json`,{task:this.editTask, description:this.editDescription})
+      async update(task){
+        let newTASK={task:this.editTask,description:this.editDescription,id:task.id}
+        let arr=[task,newTASK]
+        await this.UPDATE_LIST_IN_API(arr);
 
-        this.getItems();
-         task.edit_mode=false;
       }
 
-      // async update(task){
-      //   this.task.task=task.toDo.task;
-      //   this.task.description=task.toDo.description;
-      //
-      //
-      //    // await this.$http.put(`toDo/${id}.json`)
-      // }
-
 
     },
+
 
     beforeMount() {
-        this.getItems();
-    },
+    this.$store.dispatch(`${MyProjectsModule}/${GET_LIST_FROM_API}`)
+  },
+
   }
+
 </script>
 
 <style scoped>

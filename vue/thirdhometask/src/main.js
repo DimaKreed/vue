@@ -4,6 +4,7 @@ import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import VueRouter from 'vue-router'
 import {routes} from "./routes";
 import VueResource from 'vue-resource'
+import {store} from '../store/store'
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -23,5 +24,6 @@ Vue.use(VueRouter)
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')
