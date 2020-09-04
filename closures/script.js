@@ -73,6 +73,7 @@ class UserAccount{
     if(card)
     {this.cards.push(card);}
   }
+
   getCardByKey(number)
   {
     if (number<1||number>3) console.error('invalid number of card');
