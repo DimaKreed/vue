@@ -9,12 +9,12 @@ import {TodoModel} from "../models/todo.model";
 export class TodoService {
 
   constructor(private http:HttpClient) {
-
   }
 
   getListOfTodo():Observable<TodoModel[]>{
     return this.http.get<TodoModel[]>('https://myvueproject-2080c.firebaseio.com/.json')
 }
+
 
   // getUsers():Observable<UserModel[]>{
 //     return this.http.get<UserModel[]>('https://jsonplaceholder.typicode.com/users');
