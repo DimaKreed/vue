@@ -9,6 +9,7 @@ import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { UpdateTodoComponent } from './components/update-todo/update-todo.component';
 import { DeleteTodoComponent } from './components/delete-todo/delete-todo.component';
 import {HttpClientModule} from "@angular/common/http";
+import { AuthorComponent } from './components/author/author.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
     AddTodoComponent,
     UpdateTodoComponent,
     DeleteTodoComponent,
+    AuthorComponent,
 
   ],
   imports: [
