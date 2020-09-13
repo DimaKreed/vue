@@ -11,6 +11,7 @@ export class AppComponent {
   constructor(private userService:UserService) {
     this.userService.getUsers().subscribe(users=>{
       this.users=users;
+
     })
 
   }

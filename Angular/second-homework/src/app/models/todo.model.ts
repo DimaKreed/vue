@@ -1,5 +1,5 @@
 export interface TodoModel {
   id:string;
-  todo:string;
-  description:string;
+  todo:{task:string;
+  description:string;}
 }

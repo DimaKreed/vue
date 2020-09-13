@@ -12,9 +12,14 @@ export class TodoService {
   }
 
   getListOfTodo():Observable<TodoModel[]>{
-    return this.http.get<TodoModel[]>('https://myvueproject-2080c.firebaseio.com/.json')
+    return this.http.get<TodoModel[]>('https://myvueproject-2080c.firebaseio.com/toDo.json')
 }
-
+  addTaskToListOfTodo(task){
+    return this.http.post('https://myvueproject-2080c.firebaseio.com/toDo.json',task)
+  }
+  deleteTaskFromListOfTodo(id){
+    return this.http.delete(`https://myvueproject-2080c.firebaseio.com/toDo/${id}.json`)
+  }
 
   // getUsers():Observable<UserModel[]>{
 //     return this.http.get<UserModel[]>('https://jsonplaceholder.typicode.com/users');
