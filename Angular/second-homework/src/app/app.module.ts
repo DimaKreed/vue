@@ -10,6 +10,8 @@ import { UpdateTodoComponent } from './components/update-todo/update-todo.compon
 import { DeleteTodoComponent } from './components/delete-todo/delete-todo.component';
 import {HttpClientModule} from "@angular/common/http";
 import { AuthorComponent } from './components/author/author.component';
+import { UsersComponent } from './components/users/users.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AuthorComponent } from './components/author/author.component';
     UpdateTodoComponent,
     DeleteTodoComponent,
     AuthorComponent,
+    UsersComponent,
+    PostsComponent,
 
   ],
   imports: [
