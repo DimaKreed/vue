@@ -2,9 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {UserModel} from "../../../../../first-homework/src/app/models/user.model";
 import {PostService} from "../../services/post.service";
-import {PostModel} from "../../models/post.model";
 import {CommentService} from "../../services/comment.service";
-import {PostsComponent} from "../posts/posts.component";
 
 @Component({
   selector: 'app-users',
@@ -13,7 +11,6 @@ import {PostsComponent} from "../posts/posts.component";
 })
 export class UsersComponent implements OnInit {
 
-@ViewChild(PostsComponent) private postsComponent:PostsComponent;
 
   usersList:UserModel[]=[];
 
@@ -34,11 +31,7 @@ export class UsersComponent implements OnInit {
     });
 
   }
-  sendPosts(id){
-    //this.postsComponent.posts=this.usersList[id-1].posts;
-    //console.log(this.postsComponent.posts)
-    console.log(this.postsComponent.ar)
-  }
+
 
   ngOnInit(): void {
 
