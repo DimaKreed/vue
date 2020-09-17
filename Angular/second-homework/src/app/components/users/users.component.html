@@ -1,1 +1,9 @@
-<p>users works!</p>
+<div *ngFor="let user of usersList">
+  <ul>
+    <li>{{user.name}}</li>
+    <li>USERNAME: {{user.username}}</li>
+  </ul>
+  <button routerLink="{{user.id}}/posts" (click)="sendPosts(user.id)">See posts</button>
+  <hr>
+</div>
+
