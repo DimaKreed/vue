@@ -119,6 +119,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "second-homework"
+    }
+  },
+  "defaultProject": "second-homework",
+  "schematics": {
+    "@schematics/angular:component": {
+      "skipTests": true
+    }
+  }
 }

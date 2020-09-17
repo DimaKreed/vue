@@ -20,10 +20,9 @@ export class FullTodoListComponent implements OnInit {
         this.todoList.push({todo:todo[value],id:value});
       }
     })
-    console.log( this.todoList)
   }
-  async delete(id){
-    await this.todoService.deleteTaskFromListOfTodo(id).subscribe(value => value,error => console.log(error));
+   delete(id){
+     this.todoService.deleteTaskFromListOfTodo(id).subscribe(value => value,error => console.log(error));
   }
   ngOnInit(): void {
   }
