@@ -17,7 +17,6 @@ export class UsersComponent implements OnInit {
 
   usersList:UserModel[]=[];
 
-
   constructor(private userService:UserService,private postService:PostService,private commentService:CommentService) {
     this.userService.getUsers().subscribe(users => {this.usersList = users;
       for (let i = 1; i <= 10; i++) {
