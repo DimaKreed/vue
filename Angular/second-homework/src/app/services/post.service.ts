@@ -10,7 +10,8 @@ export class PostService {
 
   constructor(private http:HttpClient) { }
 
-  getPosts(id:number):Observable<PostModel[]>{
+  getPostsById(id:number):Observable<PostModel[]>{
     return this.http.get<PostModel[]>(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
   }
+
 }
