@@ -21,11 +21,11 @@ export class UsersComponent implements OnInit {
               private router:Router,
               private activatedRoute:ActivatedRoute) {
     this.userService.getUsers().subscribe(users => {this.usersList = users;
-      for (let i = 1; i <= 10; i++) {
+      for (let i = 1; i <= this.usersList.length; i++) {
 
         this.postService.getPostsById(i).subscribe(posts => {this.usersList[i - 1].posts = posts;
 
-          for (let j = 1; j <=10; j++) {
+          for (let j = 1; j <=this.usersList[i - 1].posts.length; j++) {
             this.commentService.getComments(j).subscribe(comments => {
               this.usersList[i-1].posts[j-1].comments=comments;
             })
