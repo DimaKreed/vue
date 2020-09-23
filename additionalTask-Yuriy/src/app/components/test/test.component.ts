@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {GetFromApiService} from "../../services/get-from-api.service";
+import {RequestModel} from "../../models/requestModel";
 
 @Component({
   selector: 'app-test',
@@ -6,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+data:[]=[];
+  constructor(private getFromApiService:GetFromApiService) {
 
-  constructor() { }
+    for (let i = 0; i < 5; i++) {
+      this.getFromApiService.getListOfArticles(i).subscribe(value => value.articles.forEach(value1 =>this.data.push(value1) ) )
+    }
+
+  }
 
   ngOnInit(): void {
   }

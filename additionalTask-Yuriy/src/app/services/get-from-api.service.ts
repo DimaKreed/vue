@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {RequestModel} from "../models/requestModel";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetFromApiService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getData():Observable<any[]>{
-    return this.http.get<any[]>('http://angular.realworld.io/')
-}
+
+  getListOfArticles(offset:number): Observable<RequestModel> {
+    return this.http.get<RequestModel>(`https://conduit.productionready.io/api/articles?limit=100&offset=${offset}`);
+  }
 }

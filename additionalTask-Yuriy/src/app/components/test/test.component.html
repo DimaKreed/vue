@@ -1,1 +1,12 @@
-<p>test works!</p>
+
+<p>Number of articles: {{data.length}}</p>
+
+<div *ngFor="let article of data">
+  <ul>
+    <li>
+      Title:{{article.title}}<br>
+      Body:{{article.body}}
+    </li>
+
+  </ul>
+</div>

@@ -23,7 +23,8 @@ export class FullTodoListComponent implements OnInit {
   }
    delete(id){
      this.todoService.deleteTaskFromListOfTodo(id).subscribe(value => value,error => console.log(error));
-  }
+     this.todoList.splice(this.todoList.findIndex(value => value.id === id),1);
+   }
   ngOnInit(): void {
   }
 }

@@ -21,7 +21,6 @@ export class AddTodoComponent implements OnInit {
   description:descriptionInput.value}
  this.todoService.addTaskToListOfTodo(todo).subscribe(value => value, error => console.log(error));
 
-  this.router.navigate(["/allTodo"], {relativeTo: this.route});
     return false;
 }
 
