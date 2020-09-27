@@ -1,0 +1,37 @@
+*{
+  font-family:"Agency FB";
+  font-size: 15px;
+  margin: 0px;
+}
+li{
+  width: 100%;
+  overflow: hidden;
+  letter-spacing: 2px;
+}
+h2,span  {
+  font-size: 30px;
+  text-align: center;
+}
+h2{
+  margin: 5px;
+}
+span
+{
+  color: #008CBA;
+}
+h4{
+  font-size: 20px;
+}
+li>h3{
+  font-size: 25px;
+}
+h3{
+  font-size: 20px;
+  font-style: inherit;
+}
+li>p{
+  font-size: 17px;
+  font-weight: lighter;
+}
+
+

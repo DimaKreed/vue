@@ -1,0 +1,19 @@
+<h3>
+  ToDo List
+</h3>
+<div *ngFor="let todo of todoList">
+  <div class="liDiv">
+    <ul >
+      <li>TASK: {{todo.todo.task}}<br>
+        DESCRIPTION: {{todo.todo.description}}
+    </ul>
+  </div>
+  <div>
+    <button (click)="delete(todo.id)">Delete</button>
+<!--    <button>Update</button>-->
+  </div>
+  <hr>
+
+</div>
+
+

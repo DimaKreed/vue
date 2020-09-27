@@ -1,0 +1,18 @@
+<h2>Posts of user <span>{{author}}</span></h2>
+<ul *ngFor="let post of posts">
+  <li><h3>{{post.title}} </h3></li>
+  <li> <p>{{post.body}}</p> </li>
+
+ <h3>Comments</h3>
+  <div>
+    <ul *ngFor="let comment of post.comments">
+      <div>
+        <li style="color:#2e6da4 ; font-weight: bold; margin-top: 5px">from:{{comment.email}}</li>
+        <li><h3 style="font-size: 20px; text-align: left" >{{comment.name}}</h3></li>
+        <li >{{comment.body}}</li>
+        <br>
+      </div>
+    </ul>
+  </div>
+  <hr>
+</ul>

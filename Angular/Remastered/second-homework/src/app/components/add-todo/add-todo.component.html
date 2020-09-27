@@ -1,0 +1,13 @@
+<form name="addTodo" (submit)="addTodo()">
+  <input type="text"
+         placeholder="Enter task"
+         name="task"
+         (change)="checkInputs()"><br>
+
+  <input type="text"
+         placeholder="Enter description"
+         name="description"
+         (change)="checkInputs()"><br>
+
+  <input type="submit" name="button" value="Add" disabled>
+</form>
