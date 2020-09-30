@@ -24,3 +24,7 @@ button:hover{
   border: solid 1px #1a1a1a;
 }
 
+.hidden{
+  display: none;
+}
+

@@ -13,6 +13,7 @@ import { AuthorComponent } from './components/author/author.component';
 import { UsersComponent } from './modules/users/components/users/users.component';
 import { PostsComponent } from './modules/users/components/posts/posts.component';
 import {UsersModule} from "./modules/users/users.module";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -27,11 +28,12 @@ import {UsersModule} from "./modules/users/users.module";
     PostsComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

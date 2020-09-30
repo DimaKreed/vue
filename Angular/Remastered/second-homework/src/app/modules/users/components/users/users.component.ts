@@ -12,8 +12,9 @@ import {UserModel} from '../../../../models/user.model';
 })
 export class UsersComponent implements OnInit {
 
-
+  selectedUser:UserModel;
   usersList: UserModel[] = [];
+
 
   constructor(private userService: UserService,
               private postService: PostService,
@@ -36,15 +37,29 @@ export class UsersComponent implements OnInit {
 
       }
     });
-
   }
 
-navigateToPosts(userId, username){
-    this.router.navigate([userId, 'posts'], {
-      relativeTo: this.activatedRoute,
-      state: {author: username}
-    });
-}
+  showInfo(div,button){
+     if(div.classList[0]===('hidden'))
+     {
+       button.innerText='Hide full user info';
+     }
+     else {
+       button.innerText='See full user info';
+     }
+    div.classList.toggle('hidden');
+  }
+
+  showUsers(userId){
+    this.selectedUser=this.usersList[userId-1];
+  }
+//
+// navigateToPosts(userId, username){
+//     this.router.navigate([userId, 'posts'], {
+//       relativeTo: this.activatedRoute,
+//       state: {author: username}
+//     });
+// }
   ngOnInit(): void {
 
   }

@@ -1,18 +1,67 @@
-<div *ngFor="let user of usersList">
-  <ul>
-    <li>{{user.name}}</li>
-    <li>USERNAME: {{user.username}}</li>
-  </ul>
-  <button [routerLink]="[user.id,'posts']"
-          [queryParams]="{author:user.username}"
-          [state]="{user:user}" disabled>
-          See posts(query-params) </button>
-  <button (click)="navigateToPosts(user.id,user.username)"
-          disabled>
-          See posts(navigate)</button>
-  <button [routerLink]="[user.id,'posts']"
-          [state]="{user:user,author:user.username}" >
-          See posts(state)</button>
-  <hr>
+<div>
+  <select name="Choose user" #chooseUser (change)="showUsers(chooseUser.value)">
+    <option value="all" selected>All users</option>
+    <option
+      *ngFor="let user of usersList"
+      value="{{user.id}}"> {{user.name}}</option>
+  </select>
 </div>
+
+<div *ngIf="chooseUser.value==='all'">
+  <div  *ngFor="let user of usersList">
+    <ul>
+      <li>{{user.name}}</li>
+      <li>USERNAME: {{user.username}}</li>
+    </ul>
+    <div class="hidden" #div name="{{user.name}}">
+      <ul>
+        <li>Website: {{user.website}}</li>
+        <li>Address:{{user.address.city}}, {{user.address.street}}</li>
+        <li>Phone number: {{user.phone}}</li>
+        <li>E-mail: {{user.email}}</li>
+      </ul>
+    </div>
+    <button #button (click)="showInfo(div,button)">See full user info</button>
+    <!--  <button [routerLink]="[user.id,'posts']"-->
+    <!--          [queryParams]="{author:user.username}"-->
+    <!--          [state]="{user:user}" disabled>-->
+    <!--          See posts(query-params) </button>-->
+    <!--  <button (click)="navigateToPosts(user.id,user.username)"-->
+    <!--          disabled>-->
+    <!--          See posts(navigate)</button>-->
+    <button [routerLink]="[user.id,'posts']"
+            [state]="{user:user,author:user.username}" >
+      See posts(state)</button>
+
+    <hr>
+  </div>
+</div>
+
+
+<div *ngIf="chooseUser.value!=='all'" >
+  <ul>
+    <li>{{selectedUser.name}}</li>
+    <li>USERNAME: {{selectedUser.username}}</li>
+  </ul>
+  <div class="hidden" #div name="{{selectedUser.name}}">
+    <ul>
+      <li>Website: {{selectedUser.website}}</li>
+      <li>Address:{{selectedUser.address.city}}, {{selectedUser.address.street}}</li>
+      <li>Phone number: {{selectedUser.phone}}</li>
+      <li>E-mail: {{selectedUser.email}}</li>
+    </ul>
+  </div>
+  <button #button (click)="showInfo(div,button)">See full user info</button>
+  <!--  <button [routerLink]="[user.id,'posts']"-->
+  <!--          [queryParams]="{author:user.username}"-->
+  <!--          [state]="{user:user}" disabled>-->
+  <!--          See posts(query-params) </button>-->
+  <!--  <button (click)="navigateToPosts(user.id,user.username)"-->
+  <!--          disabled>-->
+  <!--          See posts(navigate)</button>-->
+  <button [routerLink]="[selectedUser.id,'posts']"
+          [state]="{user:selectedUser,author:selectedUser.username}" >
+    See posts(state)</button>
+</div>
+
 
