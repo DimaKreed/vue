@@ -1,0 +1,10 @@
+*{
+  font-family: "Agency FB";
+  letter-spacing: 1px;
+  font-size: 20px;
+}
+li{
+  width: 100%;
+  overflow: hidden;
+  letter-spacing: 2px;
+}
