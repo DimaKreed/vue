@@ -16,6 +16,6 @@ export const UPDATE_LIST_IN_STORE='UPDATE_LIST_IN_STORE'
 
 
 //getters
-export const LIST_OF_TODOS='Get todoList from store';
+export const LIST_OF_TODOS='Get usersList from store';
 
 
