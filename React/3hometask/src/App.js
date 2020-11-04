@@ -4,9 +4,9 @@ import UsersInput from "./components/Users&Input";
 
 function App() {
   return (
-    <div>
+
       <UsersInput/>
-    </div>
+
   );
 }
 
