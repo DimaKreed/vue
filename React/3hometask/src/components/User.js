@@ -23,10 +23,8 @@ class User extends Component {
               Phone:{phone}<br/>
               Website:{website}
             </p>
-
           </div>
         </div>
-
       </div>
     );
   }
