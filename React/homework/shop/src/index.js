@@ -3,11 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+
+const initialState={
+  products:[],
+  cart:[]
+}
+const reducer=(state=initialState,action)=> {
+  switch (action.type) {
+    default:return state;
+  }
+}
+const store=createStore(reducer)
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
+ ,
   document.getElementById('root')
 );
 
