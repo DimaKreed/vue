@@ -63,7 +63,6 @@ const pathToDir20=path.join(process.cwd(),dir20)
 
 
 
-
 //creating directories
 createDirectory(pathToDir18);
 createDirectory(pathToDir20);
