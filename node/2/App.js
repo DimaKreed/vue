@@ -31,14 +31,26 @@ app.get('/', (req, res) => {
         .then((users) => res.render('main', { isLogged, users }))
         .catch((error) => error);
 });
+
 app.get('/login', (req, res) => {
     if (!isLogged) res.render('login');
     // if is logged user cant go to this page
 });
+
 app.get('/registration', (req, res) => {
     if (!isLogged) res.render('registration');
     // if is logged user cant go to this page
 });
+
+app.get('/logout', (req, res) => {
+    isLogged = !isLogged;
+    res.redirect('/');
+});
+
+app.get('/error', (req, res) => {
+    res.render('error');
+});
+
 app.post('/', (req, res) => {
     const { nickname, password } = req.body;
     getUsers()
@@ -50,12 +62,8 @@ app.post('/', (req, res) => {
                 }
             });
         })
-        .catch((reason) => console.log(reason));
+        .catch((reason) => reason);
     res.render('error', { errorMsg: 'Неправильний логін або пароль' });
-});
-app.get('/logout', (req, res) => {
-    isLogged = !isLogged;
-    res.redirect('/');
 });
 app.post('/registration', (req, res) => {
     const { nickname, password, email } = req.body;
@@ -73,8 +81,5 @@ app.post('/registration', (req, res) => {
                 }
             });
         })
-        .catch((reason) => console.log(reason));
-});
-app.get('/error', (req, res) => {
-  res.render('error');
+        .catch((error) => error);
 });
