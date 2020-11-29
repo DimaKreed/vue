@@ -7,10 +7,11 @@ const app = express();
 
 const pathToUsersList = path.join(process.cwd(), 'users.json');
 let isLogged = false;
+
 const getUsers = () => new Promise((resolve, reject) => {
     fs.readFile(pathToUsersList, (err, data) => {
         if (err) reject(err);
-        else resolve(JSON.parse(data.toString()));
+        resolve(JSON.parse(data.toString()));
     });
 });
 
@@ -29,7 +30,7 @@ app.listen(5000, () => {
 app.get('/', (req, res) => {
     getUsers()
         .then((users) => res.render('main', { isLogged, users }))
-        .catch((error) => error);
+        .catch((reason) => { res.send(reason); return reason; });
 });
 
 app.get('/login', (req, res) => {
@@ -53,6 +54,7 @@ app.get('/error', (req, res) => {
 
 app.post('/', (req, res) => {
     const { nickname, password } = req.body;
+
     getUsers()
         .then((users) => {
             users.forEach((user) => {
@@ -62,24 +64,24 @@ app.post('/', (req, res) => {
                 }
             });
         })
-        .catch((reason) => reason);
+        .catch((reason) => { res.send(reason); return reason; });
     res.render('error', { errorMsg: 'Неправильний логін або пароль' });
 });
 app.post('/registration', (req, res) => {
     const { nickname, password, email } = req.body;
+
     getUsers()
         .then((users) => {
             const usersList = users;
             users.forEach((user) => {
                 if (user.nickname === nickname || user.email === email) {
                     res.render('error', { errorMsg: 'уже є користувачі з даними емейлом або нікнеймом' });
-                } else {
-                    usersList.push({ nickname, password, email });
-                    fs.writeFile(pathToUsersList, JSON.stringify(usersList), (err) => err);
-                    isLogged = !isLogged;
-                    res.redirect('/');
                 }
+                usersList.push({ nickname, password, email });
+                fs.writeFile(pathToUsersList, JSON.stringify(usersList), (err) => err);
+                isLogged = !isLogged;
+                res.redirect('/');
             });
         })
-        .catch((error) => error);
+        .catch((reason) => { res.send(reason); return reason; });
 });
