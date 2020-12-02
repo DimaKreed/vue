@@ -8,12 +8,14 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/login" method="post">
-    <p>Nickname</p>
-    <input type="text" name="nickname">
-    <p>Password</p>
-    <input type="password" name="password">
-    <input type="submit" value="Log in">
-</form>
+{{#if isLogged}}
+    <h3>User</h3>
+    <p>User nickname: {{user.nickname}}</p>
+{{else}}
+    <h1>Sorry but you are not authorized</h1>
+    <form action="/" method="get">
+        <input type="submit" value="return to main page">
+    </form>
+{{/if}}
 </body>
 </html>

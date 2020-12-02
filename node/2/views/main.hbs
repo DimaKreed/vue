@@ -11,19 +11,7 @@
 <div>
     <h2>Main page</h2>
 </div>
-{{#if isLogged}}
-    <form action="/logout" method="get">
-        <input type="submit" value="log out" >
-    </form>
 
-    <h3>List of users</h3>
-    {{#each users}}
-        <ul>
-            <li>{{this.nickname}}</li>
-        </ul>
-
-    {{/each}}
-{{else}}
     <header>
         <div>
             <form action="/login" method="get">
@@ -35,7 +23,6 @@
         </div>
     </header>
     <div><h1>Welcome to our page. U can login or registration</h1></div>
-    {{/if}}
 
 </div>
 

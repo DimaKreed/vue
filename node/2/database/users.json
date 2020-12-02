@@ -2,7 +2,7 @@
   {
     "nickname": "dimas",
     "email": "dimas@ukr.net",
-    "password": 1233
+    "password": "1234"
   },
   {
     "nickname": "Babiyaka",
@@ -19,5 +19,11 @@
   {
     "nickname": "dimaKreed1",
     "password": "ddd"
+  },
+  {
+    "nickname": "dimasiK",
+    "password": "1234",
+    "email": "dd@gmail.com"
   }
+
 ]
