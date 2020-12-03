@@ -1,8 +1,8 @@
 const routes = {
-    userRouter: require('./user.router'),
-    authRouter: require('./auth.router'),
-    usersRouter: require('./users.router'),
-    errorRouter: require('./error.router')
+    userRouter: require('./user.routes'),
+    authRouter: require('./auth.routes'),
+    usersRouter: require('./users.routes'),
+    errorRouter: require('./error.routes')
 };
 
 module.exports = routes;
