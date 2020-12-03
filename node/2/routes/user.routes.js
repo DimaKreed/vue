@@ -8,5 +8,6 @@ const { checkUserIdValidity, checkUserValidity } = require('../middlewares/user.
 userRoutes.get('/:userId', checkUserIdValidity, userController.getUserById);
 userRoutes.delete('/:userId', checkUserIdValidity, userController.deleteUser);
 userRoutes.put('/:userId', checkUserValidity, checkUserIdValidity, userController.updateUser);
+userRoutes.post('/', checkUserValidity, userController.createUser);
 
 module.exports = userRoutes;

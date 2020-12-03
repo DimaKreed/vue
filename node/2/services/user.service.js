@@ -1,5 +1,5 @@
-const { pathToDB, idOfLoggedUser } = require('../data/data');
-let { isLogged } = require('../data/data');
+const { pathToDB} = require('../data/data');
+let { isLogged, idOfLoggedUser } = require('../data/data');
 const { getUsers, writeUsersToDB } = require('./actionsDB');
 
 module.exports = {
@@ -45,5 +45,27 @@ module.exports = {
                 res.send('User successfully updated');
             })
             .catch((reason) => { res.send(reason); return reason; });
-    }
+    },
+    createUser: (req, res) => {
+        const { nickname, password, email } = req.body;
+
+        getUsers(pathToDB)
+            .then((users) => {
+                const usersList = users;
+                users.forEach((user, id) => {
+                    if (user.nickname === nickname || user.email === email) {
+                        res.render('error', { errorMsg: 'уже є користувачі з даними емейлом або нікнеймом' });
+                    }
+                    usersList.push({
+                        nickname, password, email, id: usersList.length
+                    });
+                    writeUsersToDB(pathToDB, JSON.stringify(usersList));
+                    isLogged = !isLogged;
+                    // eslint-disable-next-line no-unused-vars
+                    idOfLoggedUser = id;
+                    res.redirect('/users');
+                });
+            })
+            .catch((reason) => { res.send(reason); return reason; });
+    },
 };

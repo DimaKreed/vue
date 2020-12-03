@@ -13,6 +13,5 @@ authRoutes.get('/logout', authController.logout);
 
 authRoutes.get('/registration', authController.renderRegistrationPage);
 
-authRoutes.post('/registration', checkUserValidity, authController.registration);
 
 module.exports = authRoutes;

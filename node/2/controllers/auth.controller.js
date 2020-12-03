@@ -7,6 +7,5 @@ module.exports = {
     logout: authService.logout,
 
     renderRegistrationPage: authService.renderRegistrationPage,
-    registration: authService.registration
 
 };
