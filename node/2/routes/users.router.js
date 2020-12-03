@@ -2,9 +2,9 @@ const { Router } = require('express');
 
 const usersRoutes = Router();
 
-const { getUsers } = require('../services/user.service');
+const { usersController } = require('../controllers');
 const { checkUserValidity } = require('../middlewares/user.middleware');
 
-usersRoutes.get('/', checkUserValidity, getUsers);
+usersRoutes.get('/', checkUserValidity, usersController.getUsers);
 
 module.exports = usersRoutes;
