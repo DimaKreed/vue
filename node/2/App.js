@@ -2,9 +2,11 @@ const express = require('express');
 const expressHBS = require('express-handlebars');
 const path = require('path');
 
+const db = require('../3/database').getInstance();
 const routes = require('./routes');
 
 const app = express();
+db.setModels();
 
 app.use(express.static(path.join(process.cwd(), 'dataForAll')));
 app.use(express.urlencoded({ extended: true }));

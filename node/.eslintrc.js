@@ -46,6 +46,7 @@ module.exports = {
         'new-parens': 'error',
         'no-alert': 'error',
         'no-duplicate-imports': 'error',
+        'import/no-dynamic-require': 'off',
         'no-nested-ternary': 'error',
         'no-plusplus': 'off',
         'no-mixed-spaces-and-tabs': 'error',

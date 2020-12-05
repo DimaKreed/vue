@@ -3,7 +3,9 @@
   "dependencies": {
     "eslint": "^7.14.0",
     "express": "^4.17.1",
-    "express-handlebars": "^5.2.0"
+    "express-handlebars": "^5.2.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
   },
   "description": "",
   "devDependencies": {
@@ -11,6 +13,8 @@
     "@types/express": "^4.17.9",
     "@types/express-handlebars": "^3.1.0",
     "@types/node": "^14.14.10",
+    "@types/sequelize": "^4.28.9",
+    "env": "0.0.2",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
