@@ -15,10 +15,6 @@ module.exports = {
             where: { user_id: id },
             include: [{ model: UserModel, as: 'user' }]
         });
-    // return UserModel.findAll({
-        //     where: { id },
-        //     include: [{ model: CarModel, as: 'car' }]
-        // });
     },
     createUser: (user) => {
         const UserModel = db.getModel('User');
@@ -34,11 +30,11 @@ module.exports = {
     },
 
     updateUser: (userId, user) => {
-      const UserModel = db.getModel('User');
-      return UserModel.update(
-        { ...user },
-        { returning: true, where: { id: userId } }
-      );
+        const UserModel = db.getModel('User');
+        return UserModel.update(
+            { ...user },
+            { returning: true, where: { id: userId } }
+        );
     }
 
 };
