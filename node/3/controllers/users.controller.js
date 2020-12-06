@@ -24,13 +24,10 @@ module.exports = {
     },
     createUser: async (req, res) => {
         try {
-            console.log(req.body);
-            const {
-                name, email, age, password
-            } = req.body;
-            const createdUser = await usersService.createUser({
-                name, email, age, password
-            });
+            const { id, ...userData } = req.body;
+            const createdUser = (id)
+                ? await usersService.createUser({ id, ...userData })
+                : await usersService.createUser(userData);
 
             if (!createdUser) throw new Error('troubles with creating user');
 
@@ -56,13 +53,10 @@ module.exports = {
     updateUser: async (req, res) => {
         try {
             const { id } = req.params;
-            const {
-                name, email, age, password
-            } = req.body;
-
-            const updatedUser = await usersService.updateUser(id, {
-                name, email, age, password
-            });
+            const { id: idToUpdate, ...userData } = req.body;
+            const updatedUser = (idToUpdate)
+                ? await usersService.updateUser(id, { idToUpdate, ...userData })
+                : await usersService.updateUser(id, userData);
 
             if (!updatedUser) throw new Error('troubles with updating user');
 
