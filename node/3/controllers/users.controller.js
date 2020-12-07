@@ -24,10 +24,8 @@ module.exports = {
     },
     createUser: async (req, res) => {
         try {
-            const { id, ...userData } = req.body;
-            const createdUser = (id)
-                ? await usersService.createUser({ id, ...userData })
-                : await usersService.createUser(userData);
+            const { _, ...userData } = req.body;
+            const createdUser = await usersService.createUser(userData);
 
             if (!createdUser) throw new Error('troubles with creating user');
 
