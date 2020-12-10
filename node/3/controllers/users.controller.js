@@ -24,6 +24,7 @@ module.exports = {
     },
     createUser: async (req, res) => {
         try {
+            // eslint-disable-next-line no-unused-vars
             const { _, ...userData } = req.body;
             const createdUser = await usersService.createUser(userData);
 
@@ -51,10 +52,8 @@ module.exports = {
     updateUser: async (req, res) => {
         try {
             const { id } = req.params;
-            const { id: idToUpdate, ...userData } = req.body;
-            const updatedUser = (idToUpdate)
-                ? await usersService.updateUser(id, { idToUpdate, ...userData })
-                : await usersService.updateUser(id, userData);
+            const { ...userData } = req.body;
+            const updatedUser = await usersService.updateUser(id, userData);
 
             if (!updatedUser) throw new Error('troubles with updating user');
 
