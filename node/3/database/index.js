@@ -1,6 +1,6 @@
+const { Sequelize, DataTypes } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { Sequelize, DataTypes } = require('sequelize');
 
 module.exports = (() => {
     let instance;
@@ -13,7 +13,6 @@ module.exports = (() => {
 
         const models = {};
         const pathToModels = path.join(process.cwd(), 'database', 'models');
-
         const getModels = () => {
             fs.readdir(pathToModels, (err, files) => {
                 files.forEach((file) => {
