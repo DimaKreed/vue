@@ -1,16 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-// const mysql2 = require('mysql2');
-//
-// const connection = mysql2.createConnection({
-//     user: 'root',
-//     password: 'root',
-//     dataBase: '',
-//     host: 'localhost'
-// });
-//
-// module.exports = connection.promise();
+const { Sequelize, DataTypes } = require('sequelize');
 
 module.exports = (() => {
     let instance;
