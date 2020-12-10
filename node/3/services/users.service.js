@@ -1,4 +1,4 @@
-const db = require('../dataBase').getInstance();
+const db = require('../database').getInstance();
 
 module.exports = {
 
@@ -28,7 +28,13 @@ module.exports = {
             }
         });
     },
-
+    deleteAllUsers: () => {
+        const UserModel = db.getModel('User');
+        UserModel.destroy({
+            where: {},
+            truncate: true
+        });
+    },
     updateUser: (userId, user) => {
         const UserModel = db.getModel('User');
         return UserModel.update(
