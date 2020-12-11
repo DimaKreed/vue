@@ -18,6 +18,7 @@ module.exports = {
         res.status(OK.code)
             .json(car);
     },
+
     createCar: async (req, res) => {
         // eslint-disable-next-line no-unused-vars
         const { _, ...carData } = req.body;
