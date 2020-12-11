@@ -18,3 +18,12 @@ app.listen(port, () => {
 app.use('/users', routes.usersRouter);
 app.use('/error', routes.errorRouter);
 app.use('/cars', routes.carsRouter);
+// eslint-disable-next-line no-unused-vars
+app.use('*', (err, req, res, next) => {
+    res
+        .status(err.code)
+        .json({
+            message: err.message,
+            ok: false
+        });
+});
