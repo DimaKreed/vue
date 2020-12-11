@@ -1,66 +1,33 @@
 const { usersService } = require('../services');
+const {
+    success: {
+        OK, CREATED, DELETED, UPDATED
+    }
+} = require('../database/success');
 
 module.exports = {
-    getUsers: async (req, res) => {
-        try {
-            const users = await usersService.getUsers();
-            if (!users) throw new Error('troubles with getting users');
-            res.status(200).json(users);
-        } catch (e) {
-            res.status(400).json(e.message);
-        }
+    getUsers: (req, res) => {
+        res.status(OK.code).json(req.users);
     },
 
-    getUsersById: async (req, res) => {
-        try {
-            const { id } = req.params;
-
-            const user = await usersService.getUserById(id);
-            if (!user) throw new Error('troubles with getting user');
-            res.status(200).json(user);
-        } catch (e) {
-            res.status(400).json(e.message);
-        }
+    getUsersById: (req, res) => {
+        res.status(OK.code).json(req.user);
     },
     createUser: async (req, res) => {
-        try {
-            // eslint-disable-next-line no-unused-vars
-            const { _, ...userData } = req.body;
-            const createdUser = await usersService.createUser(userData);
-
-            if (!createdUser) throw new Error('troubles with creating user');
-
-            res.status(200).json(createdUser);
-        } catch (e) {
-            res.status(400).json(e.message);
-        }
+        await usersService.createUser(req.user);
+        res.status(CREATED.code)
+            .json(CREATED.message);
     },
 
     deleteUser: async (req, res) => {
-        try {
-            const { id } = req.params;
-            const deletedUser = await usersService.deleteUser(id);
-
-            if (!deletedUser) throw new Error('troubles with deleting user');
-
-            res.status(200).json('Users successfully deleted');
-        } catch (e) {
-            res.status(400).json(e.message);
-        }
+        await usersService.deleteUser(req.id);
+        res.status(DELETED.code).json(DELETED.message);
     },
 
     updateUser: async (req, res) => {
-        try {
-            const { id } = req.params;
-            const { ...userData } = req.body;
-            const updatedUser = await usersService.updateUser(id, userData);
+        await usersService.updateUser(req.id, req.user);
 
-            if (!updatedUser) throw new Error('troubles with updating user');
-
-            res.status(200).json(updatedUser);
-        } catch (e) {
-            res.status(400).json(e.message);
-        }
+        res.status(UPDATED.code).json(UPDATED.message);
     }
 
 };
