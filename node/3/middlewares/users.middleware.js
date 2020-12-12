@@ -1,20 +1,14 @@
-const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const { ErrorHandler, errors: { NOT_VALID_BODY, NOT_VALID_ID, NOT_FOUND } } = require('../database/errors');
+const { ErrorHandler, errors: { NOT_VALID_ID, NOT_FOUND } } = require('../database/errors');
+const { BAD_REQUEST } = require('../configs/error-codes');
 const { usersService } = require('../services');
+const { usersValidator } = require('../validators');
 
 module.exports = {
     checkUserValidity: (req, res, next) => {
-        const {
-            name, email, age, password
-        } = req.body;
         try {
-            if (!name || !password || !email || !age) throw new ErrorHandler(NOT_VALID_BODY.code, NOT_VALID_BODY.message);
-            if (name.length < 4) throw new ErrorHandler(NOT_VALID_BODY.code, NOT_VALID_BODY.message);
-            if (!re.test(email)) throw new ErrorHandler(NOT_VALID_BODY.code, NOT_VALID_BODY.message);
-            if (age < 1) throw new ErrorHandler(NOT_VALID_BODY.code, NOT_VALID_BODY.message);
-            req.user = {
-                name, email, age, password
-            };
+            const { error } = usersValidator.validate(req.body);
+            if (error) throw new ErrorHandler(BAD_REQUEST, error.details.message);
+
             next();
         } catch (e) {
             next(e);
@@ -43,9 +37,12 @@ module.exports = {
     },
     checkIsUserGot: async (req, res, next) => {
         try {
-            const user = await usersService.getUserById(req.id);
-            if (!user) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
-            req.user = user;
+            const userById = await usersService.getUserById(req.id);
+            const userByParams = await usersService.getUserByParams(req.param);
+
+            if (!userById) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
+            req.userById = userById;
+            req.userByParams = userByParams;
             next();
         } catch (e) {
             next(e);

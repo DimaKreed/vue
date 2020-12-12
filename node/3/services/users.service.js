@@ -16,6 +16,16 @@ module.exports = {
             include: [{ model: UserModel, as: 'user' }]
         });
     },
+    getUserByParams: (param) => {
+        const UserModel = db.getModel('User');
+        const CarModel = db.getModel('Car');
+
+        return CarModel.findAll({
+            attributes: { exclude: ['user_id'] },
+            where: { params: param },
+            include: [{ model: UserModel, as: 'user' }]
+        });
+    },
     createUser: (user) => {
         const UserModel = db.getModel('User');
         return UserModel.create(user);

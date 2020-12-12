@@ -10,7 +10,10 @@ module.exports = {
         res.status(OK.code).json(req.users);
     },
 
-    getUsersById: (req, res) => {
+    getUserById: (req, res) => {
+        res.status(OK.code).json(req.user);
+    },
+    getUserByParams: (req, res) => {
         res.status(OK.code).json(req.user);
     },
     createUser: async (req, res) => {
