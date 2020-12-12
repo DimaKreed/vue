@@ -10,12 +10,15 @@ module.exports = Joi.object(
             .max(100)
             .required(),
         email: Joi.string()
-            .regex(EMAIL),
+            .regex(EMAIL)
+            .required(),
         age: Joi.number()
             .integer()
             .min(18)
-            .max(100),
+            .max(100)
+            .required(),
         password: Joi.string()
-            .regex(PASSWORD),
+            .regex(PASSWORD)
+            .required(),
     }
 );
