@@ -1,4 +1,4 @@
 module.exports = {
-    successCodes: require('./successCodes'),
+    successCodes: require('../../configs/successCodes'),
     success: require('./success')
 };

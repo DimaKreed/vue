@@ -1,4 +1,4 @@
-const { OK, CREATED } = require('./successCodes');
+const { OK, CREATED } = require('../../configs/successCodes');
 
 module.exports = {
     CREATED: {

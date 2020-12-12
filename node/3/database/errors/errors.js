@@ -1,4 +1,4 @@
-const { BAD_REQUEST, NOT_FOUND } = require('./error-codes');
+const { BAD_REQUEST, NOT_FOUND } = require('../../configs/error-codes');
 
 module.exports = {
     NOT_VALID_BODY: {
