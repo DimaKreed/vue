@@ -17,7 +17,7 @@ module.exports = {
         const CarModel = db.getModel('Car');
         const { error } = carsValidator.validate(car);
 
-        if (error) throw new ErrorHandler(BAD_REQUEST, error.details[0].message);
+        if (error) { throw new ErrorHandler(BAD_REQUEST, error.details[0].message); }
 
         return CarModel.create(car);
     },

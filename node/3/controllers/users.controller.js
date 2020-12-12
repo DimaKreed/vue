@@ -4,6 +4,7 @@ const {
         OK, CREATED, DELETED, UPDATED
     }
 } = require('../database/success');
+const { password: passwordHasher } = require('../helpers');
 
 module.exports = {
     getUsers: (req, res) => {
@@ -17,7 +18,8 @@ module.exports = {
         res.status(OK.code).json(req.user);
     },
     createUser: async (req, res) => {
-        await usersService.createUser(req.user);
+        req.user.password = await passwordHasher.hash(req.user.password);
+        usersService.createUser(req.user);
         res.status(CREATED.code)
             .json(CREATED.message);
     },

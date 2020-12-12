@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { RegExp: { EMAIL, PASSWORD } } = require('../helpers');
+const { PASSWORD, EMAIL } = require('../configs/regexp');
 
 module.exports = Joi.object(
     {

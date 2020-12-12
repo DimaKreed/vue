@@ -4,6 +4,8 @@ const {
         OK, UPDATED, DELETED, CREATED
     }
 } = require('../database/success');
+const { carsValidator } = require('../validators');
+const { ErrorHandler, errorCodes: { BAD_REQUEST } } = require('../database/errors');
 
 module.exports = {
     getCars: async (req, res) => {
@@ -22,6 +24,10 @@ module.exports = {
     createCar: async (req, res) => {
         // eslint-disable-next-line no-unused-vars
         const { _, ...carData } = req.body;
+        const { error } = carsValidator.validate(carData);
+
+        if (error) throw new ErrorHandler(BAD_REQUEST, error.details[0].message);
+
         await carsService.createCar(carData);
 
         res.status(CREATED.code)

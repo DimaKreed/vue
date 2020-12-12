@@ -12,5 +12,9 @@ module.exports = {
     NOT_FOUND: {
         message: 'DATA is not fount',
         code: NOT_FOUND
+    },
+    WRONG_EMAIL_OR_PASSWORD: {
+        message: 'Wrong email or password',
+        code: BAD_REQUEST
     }
 };

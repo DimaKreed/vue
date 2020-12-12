@@ -1,3 +1,3 @@
 module.exports = {
-    RegExp: require('./regexp')
+    password: require('./password')
 };

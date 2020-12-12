@@ -8,7 +8,7 @@ module.exports = {
         try {
             const { error } = usersValidator.validate(req.body);
             if (error) throw new ErrorHandler(BAD_REQUEST, error.details[0].message);
-
+            req.user = req.body;
             next();
         } catch (e) {
             next(e);
@@ -38,7 +38,7 @@ module.exports = {
     checkIsUserGot: async (req, res, next) => {
         try {
             const userById = await usersService.getUserById(req.id);
-            const userByParams = await usersService.getUserByParams(req.param);
+            const userByParams = await usersService.getUserByEmail(req.param);
 
             if (!userById) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
             req.userById = userById;
