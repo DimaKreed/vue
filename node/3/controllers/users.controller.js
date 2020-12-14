@@ -30,6 +30,7 @@ module.exports = {
     },
 
     updateUser: async (req, res) => {
+        req.user.password = await passwordHasher.hash(req.user.password);
         await usersService.updateUser(req.id, req.user);
 
         res.status(UPDATED.code).json(UPDATED.message);
