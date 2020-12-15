@@ -12,7 +12,6 @@ import {
 export const actions={
   [ADD_TODO]:async ({commit},task)=>{
     try {
-      //console.log(task,'TASK')
       const {body:{name}}= await Vue.http.post('toDo.json',task)
       const toDoItem={...task,id:name,edit_mode:false};
       commit(ADD_TASK,toDoItem);
