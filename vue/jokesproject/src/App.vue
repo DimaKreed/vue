@@ -1,15 +1,24 @@
 <template>
-  <div>
-  </div>
+    <div>
+      <Header/>
+      <router-view></router-view>
+    </div>
 </template>
 
 <script>
 
-export default {
-  name: 'App',
-  components: {
+  import Header from "./components/Header";
+
+  export default {
+    name: 'App',
+
+
+    components: {
+      Header
+    },
+
+
   }
-}
 </script>
 
 <style>
