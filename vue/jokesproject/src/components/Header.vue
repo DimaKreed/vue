@@ -12,10 +12,15 @@
             <li class="nav-item">
                 <router-link
                         class="nav-link"
-                        style="cursor: pointer"
                         active-class="active"
+                        style="cursor: pointer"
                         to="/jokes">Jokes</router-link>
             </li>
+
+            <form class="form-inline search" >
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>
+            </form>
         </ul>
     </div>
 </template>
@@ -27,5 +32,6 @@
 </script>
 
 <style>
-
+.search{
+float: right}
 </style>

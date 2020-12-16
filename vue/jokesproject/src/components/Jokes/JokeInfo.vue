@@ -1,44 +1,48 @@
 <template>
     <div>
-<!--        <div v-if="loading" > <p>loading...</p></div>-->
-<!--        <div v-else class="card" style="width: 18rem;">-->
-<!--            <div class="card-body">-->
-<!--                <h5 class="card-title">Card title</h5>-->
-<!--                <p class="card-text">{{joke.joke}}</p>-->
-<!--                <a v-on:click="navigateToJokeList" class="btn btn-primary">Back to joke list</a>-->
-<!--            </div>-->
-<!--        </div>-->
-       {{convertQuotes(joke.joke)}}
+
+        <JokeItemSkeleton
+                :errors="errors"
+                :loading="loading"
+        />
+        <div v-if="!loading" class="card-body">
+            <h5 class="card-title">{{joke.id}}</h5>
+            <p class="card-text">{{joke.joke}}</p>
+        </div>
+
+        <a v-on:click="navigateToJokeList" class="btn btn-primary">Back to joke list</a>
+
     </div>
-
-
 </template>
 
 <script>
-  import {HTTP} from "../../utils/http-common";
+  import {baseURL} from "../../constants"
+  import axios from "axios";
+  import JokeItemSkeleton from "./JokeItemSkeleton";
 
   export default {
     name: "JokeInfo",
-
+    components: {JokeItemSkeleton},
     data() {
       return {
-        id:this.$route.params.id,
-        joke: null,
-        errors:[],
-        loading:true
+        id: this.$route.params.id,
+        joke: {},
+        errors: [],
+        loading: true,
       }
     },
-    mounted(){
-      HTTP.get(this.id)
-        .then(response=>{
-          this.joke=response.data.value;
-          console.log(this.joke)
+    mounted() {
+      axios.get(baseURL + this.id)
+        .then(response => {
+          this.joke = response.data.value
         })
-        .catch(error=>{this.errors.push(error)})
-        .finally(()=>{
-          this.loading=false})
-    },
+        .catch(error => {
+          console.log(error)
+          this.errors.push(error);
+        })
+        .finally(() => this.loading = false)
 
+    },
     methods: {
       navigateToJokeList() {
         this.$router.push({name: 'JokesList'})

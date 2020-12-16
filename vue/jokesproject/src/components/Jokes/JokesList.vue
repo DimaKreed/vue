@@ -1,52 +1,38 @@
 <template>
     <div>
+        <JokeItemSkeleton
+        :loading="loading"
+        :errors="errors"/>
 
-        <div v-if="errors&&errors.length">
-            <div v-for="(error,index) of errors" :key="index" class="alert alert-danger">
-                <p>{{error.message}}</p>
+        <div v-if="!loading">
+            <div v-for="joke of paginatedJokes"
+                 :key="joke.id"
+                 class="list-group">
+                <JokeItem :joke="joke"></JokeItem>
+            </div>
+            <div>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item "
+                        :class="offset===0?'disabled':''"
+                        v-on:click="prevPage">
+                        <a class="page-link">Previous</a>
+                    </li>
+
+                    <li class="page-item active">
+                        <a class="page-link">{{offset+1}}</a>
+                    </li>
+
+                    <li class="page-item"
+                        :class="offset===numberOfPages?'disabled':''"
+                        v-on:click="nextPage">
+                        <a class="page-link">Next</a>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <div v-else>
-            <div v-if="loading">
-                <div class="d-flex justify-content-center">
-                    <p class="loading">Wait a moment, we are loading data</p>
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div v-else>
-                <div v-for="joke of paginatedJokes"
-                     :key="joke.id"
-                     class="list-group">
-                    <JokeItem :joke="joke"></JokeItem>
-                </div>
 
 
-                <div>
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item "
-                            :class="offset===0?'disabled':''"
-                            v-on:click="prevPage">
-                            <a class="page-link">Previous</a>
-                        </li>
-
-                        <li class="page-item active">
-                            <a class="page-link">{{offset+1}}</a>
-                        </li>
-
-                        <li class="page-item"
-                            :class="offset===numberOfPages?'disabled':''"
-                            v-on:click="nextPage">
-                            <a class="page-link">Next</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
 
 
     </div>
@@ -56,6 +42,7 @@
 
   import {HTTP} from "../../utils/http-common";
   import JokeItem from "./JokeItem";
+  import JokeItemSkeleton from "./JokeItemSkeleton";
 
   export default {
     name: 'JokesList',
@@ -69,7 +56,7 @@
         offset: 0
       }
     },
-    components: {JokeItem},
+    components: {JokeItemSkeleton, JokeItem},
 
     mounted() {
       HTTP.get(this.URLtoGetJokes)
@@ -109,8 +96,4 @@
 </script>
 
 <style>
-    .loading {
-        width: 17em;
-        height: 40em;
-    }
 </style>
