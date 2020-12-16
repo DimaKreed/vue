@@ -1,8 +1,7 @@
 <template>
     <div>
-        <router-link :to="`jokes/${joke.id}`">{{joke.joke}}</router-link>
+        <router-link :to="{name:'JokeInfo',params:{id:joke.id}}">{{joke.joke}}</router-link>
 <!--        <h3>{{joke.joke}}</h3>-->
-        <button @click="navigateToJokeList">Back to joke list</button>
     </div>
 </template>
 
@@ -22,9 +21,7 @@
       }
     },
     methods: {
-      navigateToJokeList() {
-        this.$router.push({name: 'JokesList'})
-      },
+
     }
   }
 </script>

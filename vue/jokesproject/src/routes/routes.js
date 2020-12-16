@@ -1,6 +1,7 @@
 import Home from "../components/Home";
 import JokesList from "../components/Jokes/JokesList";
-import JokeItem from "../components/Jokes/JokeItem";
+import JokeInfo from "../components/Jokes/JokeInfo";
+import JokesMainPage from "../components/Jokes/JokesMainPage";
 
 export const routes = [
   {
@@ -10,11 +11,11 @@ export const routes = [
   },
   {
     path: '/jokes',
-    component: JokesList,
-    name: 'JokesList',
-    props: true,
+    component: JokesMainPage,
     children: [
-      {path: '/jokes/:id', component: JokeItem,name:'JokeItem'}
+      {path: '', component: JokesList,name: 'JokesList'},
+      {path: ':id', component: JokeInfo,name:'JokeInfo'}
     ]
   },
+
 ]

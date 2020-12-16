@@ -14,7 +14,7 @@
                         class="nav-link"
                         style="cursor: pointer"
                         active-class="active"
-                        to="jokes">Jokes</router-link>
+                        to="/jokes">Jokes</router-link>
             </li>
         </ul>
     </div>
