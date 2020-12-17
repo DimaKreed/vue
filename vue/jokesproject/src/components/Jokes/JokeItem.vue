@@ -9,29 +9,29 @@
 </template>
 
 <script>
-
   export default {
     name: 'JokeItem',
+
     props: {
       joke: {
         type: Object,
         required: true
       }
     },
+
     data() {
       return {
         id: null
       }
     },
+
     methods: {
       convertQuotes(string) {
         return string.replace(/&quot;/g, '"');
       }
-    },
-    computed: {}
+    }
   }
 </script>
 
 <style>
-
 </style>

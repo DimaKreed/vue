@@ -1,6 +1,6 @@
 import Home from "../components/Home";
 import JokesList from "../components/Jokes/JokesList";
-import JokeInfo from "../components/Jokes/JokeInfo";
+import JokeInfo from "../components/Jokes/JokeItemDetails";
 import JokesMainPage from "../components/Jokes/JokesMainPage";
 
 export const routes = [

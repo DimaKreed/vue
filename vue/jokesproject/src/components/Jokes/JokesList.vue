@@ -1,8 +1,11 @@
 <template>
     <div>
-        <JokeItemSkeleton
-        :loading="loading"
-        :errors="errors"/>
+        <JokeItemSkeleton/>
+
+        <div class="float-right " v-for="n of 3" :key="n">
+            <button :disabled="limit===10*n" v-on:click="setLimit(n*10)" class="btn btn-primary">{{n*10}}</button>
+        </div>
+        <br><br>
 
         <div v-if="!loading">
             <div v-for="joke of paginatedJokes"
@@ -10,7 +13,13 @@
                  class="list-group">
                 <JokeItem :joke="joke"></JokeItem>
             </div>
-            <div>
+
+
+            <div class="float-right bottom-item" v-for="n of 3" :key="n">
+                <button :disabled="limit===10*n" v-on:click="setLimit(n*10)" class="btn btn-primary">{{n*10}}</button>
+            </div>
+
+            <div class="bottom-item">
                 <ul class="pagination justify-content-center">
                     <li class="page-item "
                         :class="offset===0?'disabled':''"
@@ -31,69 +40,97 @@
             </div>
         </div>
 
-
-
-
-
     </div>
 </template>
 
 <script>
-
-  import {HTTP} from "../../utils/http-common";
   import JokeItem from "./JokeItem";
   import JokeItemSkeleton from "./JokeItemSkeleton";
 
+  import {
+    GET_JOKES,
+    SEARCH_STRING,
+    JOKES,
+    LOADING_STATUS,
+    PAGINATE_JOKES,
+    FILTERED_PAGINATED_JOKES
+  } from "../../store/jokes/types";
+  import {JokesModule} from './../../store/index'
+
+  import {createNamespacedHelpers} from 'vuex';
+
+  const {mapActions, mapGetters, mapMutations} = createNamespacedHelpers(JokesModule);
+
   export default {
     name: 'JokesList',
+
     data() {
       return {
-        jokes: [],
-        errors: [],
-        loading: true,
         URLtoGetJokes: '/random/1000',
-        limit: 100,
+        limit: 10,
         offset: 0
       }
     },
+
     components: {JokeItemSkeleton, JokeItem},
 
-    mounted() {
-      HTTP.get(this.URLtoGetJokes)
-        .then(response => {
-          this.jokes = response.data.value
-        })
-        .catch(error => {
-          this.errors.push(error);
-        })
-        .finally(() => this.loading = false)
-    },
     computed: {
+      ...mapGetters({
+        SEARCH_STRING,
+        jokes: JOKES,
+        loading: LOADING_STATUS,
+        paginatedJokes: FILTERED_PAGINATED_JOKES
+      }),
 
       numberOfPages() {
         return Math.floor(this.jokes.length / this.limit) + 1;
       },
-      paginatedJokes() {
-        const start = this.offset * this.limit;
-        const end = start + this.limit;
-        return this.jokes.slice(start, end)
-      }
     },
+
     methods: {
+      ...mapActions({
+        getJokes: GET_JOKES
+      }),
+
+      ...mapMutations({
+        paginateJokes: PAGINATE_JOKES
+      }),
+
       nextPage() {
         if (this.offset < this.numberOfPages)
-          this.offset++
+          this.offset++;
+        this.paginateJokes({offset: this.offset, limit: this.limit})
+
       },
+
       prevPage() {
         if (this.offset > 0)
-          this.offset--
+          this.offset--;
+        this.paginateJokes({offset: this.offset, limit: this.limit})
+      },
+
+      setLimit(payload) {
+        this.limit = payload;
+        this.paginateJokes({offset: this.offset, limit: this.limit})
       }
 
-    }
+    },
 
+    mounted() {
+      this.getJokes(this.URLtoGetJokes);
+      this.paginateJokes({offset: this.offset, limit: this.limit})
+    }
 
   }
 </script>
 
 <style>
+    .bottom-item {
+        margin-top: 2em;
+    }
+
+    .float-right {
+        margin-right: 2em;
+    }
+
 </style>

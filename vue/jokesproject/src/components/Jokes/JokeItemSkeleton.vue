@@ -21,18 +21,23 @@
 </template>
 
 <script>
+
+  import {JokesModule} from './../../store/index'
+  import {createNamespacedHelpers} from "vuex";
+  import {ERRORS, LOADING_STATUS} from "../../store/jokes/types";
+
+  const {mapGetters} = createNamespacedHelpers(JokesModule);
     export default {
       name:"JokeItemSkeleton",
-      props:{
-        loading:{
-          type:Boolean,
-          required:true
-        },
-        errors:{
-          type:Array,
-          required:true
-        }
-      }
+
+      computed:{
+        ...mapGetters({
+          loading:LOADING_STATUS,
+          errors:ERRORS
+        })
+      },
+
+
     }
 
 </script>

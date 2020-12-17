@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    export default {
-      name:"JokesMainPage"
-    }
+  export default {
+    name: "JokesMainPage"
+  }
 </script>
 
 <style>

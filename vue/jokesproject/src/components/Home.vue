@@ -1,6 +1,13 @@
 <template>
     <div>
-        <h1>home</h1>
+        <div class="container">
+            <div class="starter-template">
+                <h1>HOME PAGE</h1>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, sit?.<br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur esse maxime nihil quo
+                    soluta.</p>
+            </div>
+        </div>
     </div>
 </template>
 
