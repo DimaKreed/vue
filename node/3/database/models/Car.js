@@ -27,9 +27,9 @@ module.exports = (client, DataTypes) => {
         }
     );
 
-    const User = require('./User')(client, DataTypes);
-
-    Car.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+    // const User = require('./User')(client, DataTypes);
+    //
+    // Car.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
     return Car;
 };

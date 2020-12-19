@@ -30,6 +30,11 @@ module.exports = (client, DataTypes) => {
             timestamps: false
         }
     );
+    const Car = require('./Car')(client, DataTypes);
+    User.hasMany(Car, {
+        foreignKey: 'user_id',
+        onDelete: 'cascade'
+    });
 
     return User;
 };

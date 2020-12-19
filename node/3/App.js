@@ -18,6 +18,7 @@ app.listen(port, () => {
 app.use('/users', routes.usersRouter);
 app.use('/cars', routes.carsRouter);
 app.use('/auth', routes.authRouter);
+
 // eslint-disable-next-line no-unused-vars
 app.use('*', (err, req, res, next) => {
     res

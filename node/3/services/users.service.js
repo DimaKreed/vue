@@ -3,24 +3,26 @@ const db = require('../database').getInstance();
 module.exports = {
 
     getUsers: () => {
-        const UserModel = db.getModel('User');
-        return UserModel.findAll();
-    },
-    getUserById: (id) => {
-        const UserModel = db.getModel('User');
         const CarModel = db.getModel('Car');
-
-        return CarModel.findAll({
-            attributes: { exclude: ['user_id'] },
-            where: { user_id: id },
-            include: [{ model: UserModel, as: 'user' }]
+        const UserModel = db.getModel('User');
+        return UserModel.findAll({
+            include: CarModel
         });
     },
-    getUserByEmail: (email) => {
+    getUserById: (id) => {
+        const CarModel = db.getModel('Car');
         const UserModel = db.getModel('User');
-
-        return UserModel.findOne({
-            where: { email },
+        return UserModel.findByPk(id, {
+            include: CarModel,
+            exclude: 'password',
+        });
+    },
+    getUserByParams: (param) => {
+        const CarModel = db.getModel('Car');
+        const UserModel = db.getModel('User');
+        return UserModel.findAll({
+            where: param,
+            include: CarModel
         });
     },
     createUser: (user) => {
@@ -49,6 +51,11 @@ module.exports = {
             { ...user },
             { returning: true, where: { id: userId } }
         );
+    },
+
+    normalizeUser: (user) => {
+        if (Array.isArray(user)) delete user[0].dataValues.password;
+        else delete user.dataValues.password;
     }
 
 };

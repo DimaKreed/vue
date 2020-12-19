@@ -1,3 +1,3 @@
 module.exports = {
-    password: require('./password')
+    password: require('./passwordHasherComparator')
 };

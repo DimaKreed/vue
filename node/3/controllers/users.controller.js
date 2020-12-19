@@ -4,36 +4,62 @@ const {
         OK, CREATED, DELETED, UPDATED
     }
 } = require('../database/success');
+const { ErrorHandler, errors: { AlREADY_EXISTS, NOT_FOUND } } = require('../database/errors');
+
 const { password: passwordHasher } = require('../helpers');
 
 module.exports = {
     getUsers: (req, res) => {
-        res.status(OK.code).json(req.users);
+        try {
+            res.status(OK.code)
+                .json(req.users);
+        } catch (e) {
+        }
     },
 
-    getUserById: (req, res) => {
-        res.status(OK.code).json(req.user);
+    getUser: (req, res) => {
+        try {
+            res.status(OK.code).json(req.user);
+        } catch (e) {
+        }
     },
-    getUserByParams: (req, res) => {
-        res.status(OK.code).json(req.user);
-    },
+
     createUser: async (req, res) => {
-        req.user.password = await passwordHasher.hash(req.user.password);
-        usersService.createUser(req.user);
-        res.status(CREATED.code)
-            .json(CREATED.message);
+        try {
+            if (req.user_is_present) throw new ErrorHandler(AlREADY_EXISTS.code, AlREADY_EXISTS.message);
+
+            req.user.password = await passwordHasher.hash(req.user.password);
+            usersService.createUser(req.user);
+            res.status(CREATED.code)
+                .json(CREATED.message);
+        } catch (e) {
+
+        }
     },
 
     deleteUser: async (req, res) => {
-        await usersService.deleteUser(req.id);
-        res.status(DELETED.code).json(DELETED.message);
+        try {
+            if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
+
+            await usersService.deleteUser(req.id);
+            res.status(DELETED.code).json(DELETED.message);
+        } catch (e) {
+        }
     },
 
     updateUser: async (req, res) => {
-        req.user.password = await passwordHasher.hash(req.user.password);
-        await usersService.updateUser(req.id, req.user);
+        try {
+            if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
+            req.user.password = await passwordHasher.hash(req.user.password);
 
-        res.status(UPDATED.code).json(UPDATED.message);
+            // todo
+            console.log('i here');
+            await usersService.updateUser(req.id, req.user);
+            console.log('updated');
+
+            res.status(UPDATED.code).json(UPDATED.message);
+        } catch (e) {
+        }
     }
 
 };

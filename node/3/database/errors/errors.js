@@ -1,4 +1,4 @@
-const { BAD_REQUEST, NOT_FOUND } = require('../../configs/error-codes');
+const { BAD_REQUEST, NOT_FOUND, CONFLICT } = require('../../configs/error-codes');
 
 module.exports = {
     NOT_VALID_BODY: {
@@ -16,5 +16,9 @@ module.exports = {
     WRONG_EMAIL_OR_PASSWORD: {
         message: 'Wrong email or password',
         code: BAD_REQUEST
+    },
+    AlREADY_EXISTS: {
+        message: 'user with this email is already exists',
+        code: CONFLICT
     }
 };
