@@ -13,6 +13,12 @@ module.exports = {
 
         return CarModel.findByPk(id);
     },
+    getCarByParams: (param) => {
+        const CarModel = db.getModel('Car');
+        return CarModel.findOne({
+            where: param
+        });
+    },
     createCar: (car) => {
         const CarModel = db.getModel('Car');
         const { error } = carsValidator.validate(car);

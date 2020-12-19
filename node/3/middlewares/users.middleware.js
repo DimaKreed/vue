@@ -30,7 +30,7 @@ module.exports = {
     checkIsUsersGot: async (req, res, next) => {
         try {
             const users = await usersService.getUsers();
-            if (!users) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
+            if (!users || !users.length) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
             req.users = users;
             next();
         } catch (e) {
@@ -92,7 +92,6 @@ module.exports = {
             if (user_id) {
                 const user = await usersService.getUserById(user_id);
                 if (user) {
-                    console.log('++++');
                     req.user_is_present = true;
                     req.userInDB = user;
                 }

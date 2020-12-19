@@ -9,48 +9,40 @@ const { ErrorHandler, errors: { AlREADY_EXISTS, NOT_FOUND } } = require('../data
 const { password: passwordHasher } = require('../helpers');
 
 module.exports = {
-    getUsers: (req, res) => {
+    getUsers: (req, res, next) => {
         try {
-            res.status(OK.code)
-                .json(req.users);
-        } catch (e) {
-        }
+            res.status(OK.code).json(req.users);
+        } catch (e) { next(e); }
     },
 
-    getUser: (req, res) => {
+    getUser: (req, res, next) => {
         try {
             res.status(OK.code).json(req.user);
-        } catch (e) {
-        }
+        } catch (e) { next(e); }
     },
 
-    createUser: async (req, res) => {
+    createUser: async (req, res, next) => {
         try {
             if (req.user_is_present) throw new ErrorHandler(AlREADY_EXISTS.code, AlREADY_EXISTS.message);
 
             req.user.password = await passwordHasher.hash(req.user.password);
-            usersService.createUser(req.user);
+            await usersService.createUser(req.user);
             res.status(CREATED.code)
                 .json(CREATED.message);
-        } catch (e) {
-
-        }
+        } catch (e) { next(e); }
     },
 
-    deleteUser: async (req, res) => {
-        console.log('deleteUser');
-        console.log(req.user_is_present);
+    deleteUser: async (req, res, next) => {
         try {
             console.log();
             if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
             console.log('deleteUser');
             await usersService.deleteUser(req.userInDB.id);
             res.status(DELETED.code).json(DELETED.message);
-        } catch (e) {
-        }
+        } catch (e) { next(e); }
     },
 
-    updateUser: async (req, res) => {
+    updateUser: async (req, res, next) => {
         try {
             if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
             req.user.password = await passwordHasher.hash(req.user.password);
@@ -59,8 +51,7 @@ module.exports = {
             console.log('updated');
 
             res.status(UPDATED.code).json(UPDATED.message);
-        } catch (e) {
-        }
+        } catch (e) { next(e); }
     }
 
 };
