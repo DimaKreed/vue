@@ -1,7 +1,7 @@
 const { ErrorHandler, errors: { NOT_FOUND } } = require('../database/errors');
 const { BAD_REQUEST } = require('../configs/error-codes');
 const { usersService } = require('../services');
-const { usersValidator, usersIdValidator } = require('../validators/cars');
+const { usersValidator, usersIdValidator } = require('../validators');
 const { password: passwordHasher } = require('../helpers');
 
 module.exports = {
@@ -79,11 +79,23 @@ module.exports = {
     checkIsUserPresentInDataBase: async (req, res, next) => {
         try {
             const { email } = req.user;
-            const user = await usersService.getUserByParams({ email });
+            if (email) {
+                const user = await usersService.getUserByParams({ email });
 
-            if (user && user.length) {
-                req.user_is_present = true;
-                [req.userInDB] = user;
+                if (user) {
+                    req.user_is_present = true;
+                    req.userInDB = user;
+                }
+            }
+
+            const { user_id } = req.params;
+            if (user_id) {
+                const user = await usersService.getUserById(user_id);
+                if (user) {
+                    console.log('++++');
+                    req.user_is_present = true;
+                    req.userInDB = user;
+                }
             }
 
             next();
@@ -96,6 +108,28 @@ module.exports = {
         try {
             const { user, userInDB } = req;
             passwordHasher.compare(user.password, userInDB.password);
+            next();
+        } catch (e) {
+
+        }
+    },
+
+    setNewValuesToUser: (req, res, next) => {
+        try {
+            const { user } = req;
+            if (user.newPassword) {
+                user.password = user.newPassword;
+                delete user.newPassword;
+            }
+            if (user.newAge) {
+                user.age = user.newAge;
+                delete user.newAge;
+            }
+            if (user.newEmail) {
+                user.email = user.newEmail;
+                delete user.newEmail;
+            }
+
             next();
         } catch (e) {
 

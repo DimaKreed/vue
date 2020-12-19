@@ -20,5 +20,13 @@ module.exports = Joi.object(
         password: Joi.string()
             .regex(PASSWORD)
             .required(),
+        newEmail: Joi.string()
+            .regex(EMAIL),
+        newAge: Joi.number()
+            .integer()
+            .min(18)
+            .max(100),
+        newPassword: Joi.string()
+            .regex(PASSWORD),
     }
 );

@@ -38,10 +38,13 @@ module.exports = {
     },
 
     deleteUser: async (req, res) => {
+        console.log('deleteUser');
+        console.log(req.user_is_present);
         try {
+            console.log();
             if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
-
-            await usersService.deleteUser(req.id);
+            console.log('deleteUser');
+            await usersService.deleteUser(req.userInDB.id);
             res.status(DELETED.code).json(DELETED.message);
         } catch (e) {
         }
@@ -52,9 +55,7 @@ module.exports = {
             if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
             req.user.password = await passwordHasher.hash(req.user.password);
 
-            // todo
-            console.log('i here');
-            await usersService.updateUser(req.id, req.user);
+            await usersService.updateUser(req.userInDB.id, req.user);
             console.log('updated');
 
             res.status(UPDATED.code).json(UPDATED.message);

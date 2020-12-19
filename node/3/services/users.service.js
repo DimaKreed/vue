@@ -20,7 +20,7 @@ module.exports = {
     getUserByParams: (param) => {
         const CarModel = db.getModel('Car');
         const UserModel = db.getModel('User');
-        return UserModel.findAll({
+        return UserModel.findOne({
             where: param,
             include: CarModel
         });
@@ -46,6 +46,9 @@ module.exports = {
         });
     },
     updateUser: (userId, user) => {
+        console.log(userId);
+        console.log(user);
+
         const UserModel = db.getModel('User');
         return UserModel.update(
             { ...user },

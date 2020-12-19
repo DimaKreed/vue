@@ -28,6 +28,7 @@ usersRoutes.put('/:user_id',
     userMiddleware.checkUserValidity,
     userMiddleware.checkIsUserPresentInDataBase,
     userMiddleware.checkIsPasswordOk,
+    userMiddleware.setNewValuesToUser,
     usersController.updateUser);
 usersRoutes.delete('/:user_id',
     userMiddleware.checkIsUserPresentInDataBase,

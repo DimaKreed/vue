@@ -4,7 +4,7 @@ const {
         OK, UPDATED, DELETED, CREATED
     }
 } = require('../database/success');
-const { carsValidator } = require('../validators/cars');
+const { carsValidator } = require('../validators');
 const { ErrorHandler, errorCodes: { BAD_REQUEST } } = require('../database/errors');
 
 module.exports = {
