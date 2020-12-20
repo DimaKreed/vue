@@ -1,10 +1,14 @@
+const {
+    DB_USERNAME, DB_PASSWORD, DB, DIALECT, HOST
+} = require('./config');
+
 module.exports = {
     development: {
-        username: 'root',
-        password: 'Lvbnhjrjv24012001',
-        database: 'node',
-        host: '127.0.0.1',
-        dialect: 'mysql'
+        username: DB_USERNAME,
+        password: DB_PASSWORD,
+        database: DB,
+        host: HOST,
+        dialect: DIALECT
     },
 
 };

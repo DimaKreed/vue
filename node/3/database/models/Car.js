@@ -1,6 +1,8 @@
+const { models: { CAR }, tableNames: { USERS, CARS }, foreignKey: { ID } } = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const Car = client.define(
-        'Car',
+        CAR,
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -16,20 +18,16 @@ module.exports = (client, DataTypes) => {
                 allowNull: false,
                 foreignKey: true,
                 references: {
-                    model: 'users',
-                    key: 'id'
+                    model: USERS,
+                    key: ID
                 }
             }
         },
         {
-            tableName: 'cars',
+            tableName: CARS,
             timestamps: false
         }
     );
-
-    // const User = require('./User')(client, DataTypes);
-    //
-    // Car.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
     return Car;
 };

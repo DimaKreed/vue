@@ -14,9 +14,10 @@ module.exports = {
             if (req.user_is_present) throw new ErrorHandler(AlREADY_EXISTS.code, AlREADY_EXISTS.message);
 
             req.user.password = await passwordHasher.hash(req.user.password);
+
             await usersService.createUser(req.user);
-            res.status(CREATED.code)
-                .json(CREATED.message);
+
+            res.status(CREATED.code).json(CREATED.message);
         } catch (e) { next(e); }
     },
 
@@ -38,7 +39,6 @@ module.exports = {
             req.user.password = await passwordHasher.hash(req.user.password);
 
             await usersService.updateUser(req.userInDB.id, req.user);
-            console.log('updated');
 
             res.status(UPDATED.code).json(UPDATED.message);
         } catch (e) { next(e); }
@@ -47,7 +47,7 @@ module.exports = {
     deleteUser: async (req, res, next) => {
         try {
             if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
-            console.log('deleteUser');
+
             await usersService.deleteUser(req.userInDB.id);
             res.status(DELETED.code).json(DELETED.message);
         } catch (e) { next(e); }

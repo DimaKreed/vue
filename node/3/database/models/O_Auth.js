@@ -1,6 +1,8 @@
+const { models: { O_AUTH }, tableNames: { USERS }, foreignKey: { ID } } = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const O_Auth = client.define(
-        'O_Auth',
+        O_AUTH,
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -20,8 +22,8 @@ module.exports = (client, DataTypes) => {
                 allowNull: false,
                 foreignKey: true,
                 reference: {
-                    model: 'users',
-                    key: 'id'
+                    model: USERS,
+                    key: ID
                 }
             },
             created_at: {
@@ -30,7 +32,7 @@ module.exports = (client, DataTypes) => {
             }
         },
         {
-            tableName: 'o_auth',
+            tableName: O_AUTH,
             timestamps: false
         }
     );

@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
+
 const db = require('./database').getInstance();
 
 const app = express();
@@ -28,6 +29,3 @@ app.use('*', (err, req, res, next) => {
             ok: false
         });
 });
-// Todo .env
-// Todo migrations
-// todo constants

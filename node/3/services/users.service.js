@@ -1,4 +1,5 @@
 const db = require('../database').getInstance();
+const { models: { CAR, USER } } = require('../constants/constants');
 
 module.exports = {
 
@@ -24,8 +25,8 @@ module.exports = {
         });
     },
     getUserByParams: (param) => {
-        const CarModel = db.getModel('Car');
-        const UserModel = db.getModel('User');
+        const CarModel = db.getModel(CAR);
+        const UserModel = db.getModel(USER);
         return UserModel.findOne({
             where: param,
             include: CarModel
@@ -33,7 +34,7 @@ module.exports = {
     },
 
     updateUser: (userId, user) => {
-        const UserModel = db.getModel('User');
+        const UserModel = db.getModel(USER);
         return UserModel.update(
             { ...user },
             { returning: true, where: { id: userId } }
@@ -41,7 +42,7 @@ module.exports = {
     },
 
     deleteUser: (userId) => {
-        const UserModel = db.getModel('User');
+        const UserModel = db.getModel(USER);
         return UserModel.destroy({
             where: {
                 id: userId
@@ -49,7 +50,7 @@ module.exports = {
         });
     },
     deleteAllUsers: () => {
-        const UserModel = db.getModel('User');
+        const UserModel = db.getModel(USER);
         UserModel.destroy({
             where: {},
             truncate: true

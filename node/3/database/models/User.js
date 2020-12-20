@@ -1,6 +1,10 @@
+const {
+    models: { USER }, tableNames: { USERS }, foreignKey: { USER_ID }, changeTypes: { CASCADE }
+} = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const User = client.define(
-        'User',
+        USER,
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -26,7 +30,7 @@ module.exports = (client, DataTypes) => {
             },
         },
         {
-            tableName: 'users',
+            tableName: USERS,
             timestamps: false
         }
     );
@@ -34,13 +38,13 @@ module.exports = (client, DataTypes) => {
     const O_Auth = require('./O_Auth')(client, DataTypes);
 
     User.hasMany(Car, {
-        foreignKey: 'user_id',
-        onDelete: 'cascade'
+        foreignKey: USER_ID,
+        onDelete: CASCADE
     });
 
     User.hasMany(O_Auth, {
-        foreignKey: 'user_id',
-        onDelete: 'cascade'
+        foreignKey: USER_ID,
+        onDelete: CASCADE
     });
     return User;
 };

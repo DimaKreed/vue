@@ -1,11 +1,15 @@
 const jwt = require('jsonwebtoken');
 const { authValidator } = require('../validators');
 const { usersService, authService } = require('../services');
+const { ACCESS_TOKEN_SECRET_KEY, REFRESH_TOKEN_SECRET_KEY } = require('../configs/config');
 const {
-    errorCodes: { BAD_REQUEST }, ErrorHandler, errors: {
+    errorCodes: { BAD_REQUEST },
+    ErrorHandler,
+    errors: {
         NOT_VALID_BODY, NOT_FOUND, NOT_VALID_TOKEN, PERMISSION_DENIED
     }
 } = require('../database/errors');
+
 const { AUTHORIZATION } = require('../constants/constants');
 
 module.exports = {
@@ -48,7 +52,7 @@ module.exports = {
             if (!access_token) {
                 throw new ErrorHandler(NOT_VALID_TOKEN.code, NOT_VALID_TOKEN.message);
             }
-            jwt.verify(access_token, 'access_key', (err) => {
+            jwt.verify(access_token, ACCESS_TOKEN_SECRET_KEY, (err) => {
                 if (err) {
                     throw new ErrorHandler(NOT_VALID_TOKEN.code, NOT_VALID_TOKEN.message);
                 }
@@ -75,7 +79,7 @@ module.exports = {
             if (!refresh_token) {
                 throw new ErrorHandler(NOT_VALID_TOKEN.code, NOT_VALID_TOKEN.message);
             }
-            jwt.verify(refresh_token, 'refresh_key', (err) => {
+            jwt.verify(refresh_token, REFRESH_TOKEN_SECRET_KEY, (err) => {
                 if (err) {
                     throw new ErrorHandler(NOT_VALID_TOKEN.code, NOT_VALID_TOKEN.message);
                 }
