@@ -33,9 +33,6 @@ module.exports = {
     },
 
     updateUser: (userId, user) => {
-        console.log(userId);
-        console.log(user);
-
         const UserModel = db.getModel('User');
         return UserModel.update(
             { ...user },

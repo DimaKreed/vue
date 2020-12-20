@@ -1,12 +1,33 @@
-const { password: passwordComparator } = require('../helpers');
-const { usersService: { getUserByParams } } = require('../services');
+const { authService } = require('../services');
+const { tokinizer } = require('../helpers');
 
 module.exports = {
-    getUser: async (req, res) => {
-        const user = await getUserByParams(req.body.email);
-        const { password, ...normalizedUser } = user.dataValues;
-        await passwordComparator.compare(req.body.password, password);
-        res.json(normalizedUser);
+    login: async (req, res, next) => {
+        try {
+            const token_pair = tokinizer();
+            const { id } = req.userInDB;
+            const userInOAuthTable = await authService.getTokensByUserId({ user_id: id });
+
+            if (userInOAuthTable) {
+                await authService.updateTokenPair({ user_id: id }, token_pair);
+            } else {
+                await authService.createTokenPair({ user_id: id, ...token_pair });
+            }
+
+            res.json(token_pair);
+        } catch (e) {
+            next(e);
+        }
+    },
+    refreshAccessToken: async (req, res, next) => {
+        try {
+            const { access_token } = tokinizer();
+            const { id } = req.user;
+            await authService.updateTokenPair({ user_id: id }, { access_token });
+            res.json({ access_token });
+        } catch (e) {
+            next(e);
+        }
     }
 
 };

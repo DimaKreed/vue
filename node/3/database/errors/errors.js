@@ -1,4 +1,6 @@
-const { BAD_REQUEST, NOT_FOUND, CONFLICT } = require('../../configs/error-codes');
+const {
+    BAD_REQUEST, NOT_FOUND, CONFLICT, UNAUTHORIZED, FORBIDDEN
+} = require('../../configs/error-codes');
 
 module.exports = {
     NOT_VALID_BODY: {
@@ -20,5 +22,13 @@ module.exports = {
     AlREADY_EXISTS: {
         message: 'data is already exists',
         code: CONFLICT
+    },
+    NOT_VALID_TOKEN: {
+        message: 'token is not valid',
+        code: UNAUTHORIZED
+    },
+    PERMISSION_DENIED: {
+        message: 'permission denied',
+        code: FORBIDDEN
     }
 };

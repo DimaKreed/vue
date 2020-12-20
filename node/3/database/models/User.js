@@ -31,10 +31,16 @@ module.exports = (client, DataTypes) => {
         }
     );
     const Car = require('./Car')(client, DataTypes);
+    const O_Auth = require('./O_Auth')(client, DataTypes);
+
     User.hasMany(Car, {
         foreignKey: 'user_id',
         onDelete: 'cascade'
     });
 
+    User.hasMany(O_Auth, {
+        foreignKey: 'user_id',
+        onDelete: 'cascade'
+    });
     return User;
 };

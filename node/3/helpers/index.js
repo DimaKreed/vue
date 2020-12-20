@@ -1,3 +1,4 @@
 module.exports = {
-    password: require('./passwordHasherComparator')
+    password: require('./passwordHasherComparator'),
+    tokinizer: require('./tokinizer')
 };

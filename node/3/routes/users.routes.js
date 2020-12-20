@@ -3,9 +3,10 @@ const { Router } = require('express');
 const usersRoutes = Router();
 
 const { usersController } = require('../controllers');
-const { userMiddleware } = require('../middlewares');
+const { userMiddleware, authMiddleware } = require('../middlewares');
 
 usersRoutes.get('/',
+    authMiddleware.checkAccessToken,
     userMiddleware.checkIsUsersGot,
     userMiddleware.normalizeUser,
     usersController.getUsers);
@@ -14,6 +15,7 @@ usersRoutes.post('/',
     userMiddleware.checkIsUserPresentInDataBase,
     usersController.createUser);
 usersRoutes.get('/params',
+    authMiddleware.checkAccessToken,
     userMiddleware.checkIsUserGot,
     userMiddleware.normalizeUser,
     usersController.getUser);
@@ -21,16 +23,22 @@ usersRoutes.get('/params',
 usersRoutes.use('/:user_id', userMiddleware.checkUserIdValidity);
 
 usersRoutes.get('/:user_id',
+    authMiddleware.checkAccessToken,
+    authMiddleware.checkPermission,
     userMiddleware.checkIsUserGot,
     userMiddleware.normalizeUser,
     usersController.getUser);
 usersRoutes.put('/:user_id',
+    authMiddleware.checkAccessToken,
+    authMiddleware.checkPermission,
     userMiddleware.checkUserValidity,
     userMiddleware.checkIsUserPresentInDataBase,
     userMiddleware.checkIsPasswordOk,
     userMiddleware.setNewValuesToUser,
     usersController.updateUser);
 usersRoutes.delete('/:user_id',
+    authMiddleware.checkAccessToken,
+    authMiddleware.checkPermission,
     userMiddleware.checkIsUserPresentInDataBase,
     usersController.deleteUser);
 

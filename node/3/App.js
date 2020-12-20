@@ -28,3 +28,6 @@ app.use('*', (err, req, res, next) => {
             ok: false
         });
 });
+// Todo .env
+// Todo migrations
+// todo constants

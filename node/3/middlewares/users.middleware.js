@@ -59,9 +59,9 @@ module.exports = {
 
     checkIsUserPresentInDataBase: async (req, res, next) => {
         try {
-            const { email } = req.user;
-            if (email) {
-                const user = await usersService.getUserByParams({ email });
+            const { email, name } = req.user;
+            if (email || name) {
+                const user = await usersService.getUserByParams({ email } || { name });
 
                 if (user) {
                     req.user_is_present = true;
