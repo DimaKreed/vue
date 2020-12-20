@@ -21,7 +21,6 @@ module.exports = {
             const { error } = usersIdValidator.validate(req.params);
             if (error) throw new ErrorHandler(BAD_REQUEST, error.details[0].message);
 
-            req.user = req.params.user_id;
             next();
         } catch (e) {
             next(e);
@@ -109,7 +108,7 @@ module.exports = {
             passwordHasher.compare(user.password, userInDB.password);
             next();
         } catch (e) {
-
+            next(e);
         }
     },
 
@@ -120,18 +119,10 @@ module.exports = {
                 user.password = user.newPassword;
                 delete user.newPassword;
             }
-            if (user.newAge) {
-                user.age = user.newAge;
-                delete user.newAge;
-            }
-            if (user.newEmail) {
-                user.email = user.newEmail;
-                delete user.newEmail;
-            }
 
             next();
         } catch (e) {
-
+            next(e);
         }
     }
 };

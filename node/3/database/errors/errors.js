@@ -18,7 +18,7 @@ module.exports = {
         code: BAD_REQUEST
     },
     AlREADY_EXISTS: {
-        message: 'user with this email is already exists',
+        message: 'data is already exists',
         code: CONFLICT
     }
 };

@@ -34,7 +34,6 @@ module.exports = {
 
     deleteUser: async (req, res, next) => {
         try {
-            console.log();
             if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
             console.log('deleteUser');
             await usersService.deleteUser(req.userInDB.id);
@@ -45,6 +44,7 @@ module.exports = {
     updateUser: async (req, res, next) => {
         try {
             if (!req.user_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
+
             req.user.password = await passwordHasher.hash(req.user.password);
 
             await usersService.updateUser(req.userInDB.id, req.user);
