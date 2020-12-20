@@ -1,5 +1,5 @@
 const { ErrorHandler, errors: { NOT_FOUND } } = require('../database/errors');
-const { BAD_REQUEST } = require('../configs/error-codes');
+const { BAD_REQUEST } = require('../constants/error-codes');
 const { usersService } = require('../services');
 const { usersValidator, usersIdValidator } = require('../validators');
 const { password: passwordHasher } = require('../helpers');

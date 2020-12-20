@@ -6,6 +6,7 @@ const {
         NOT_VALID_BODY, NOT_FOUND, NOT_VALID_TOKEN, PERMISSION_DENIED
     }
 } = require('../database/errors');
+const { AUTHORIZATION } = require('../constants/constants');
 
 module.exports = {
     checkAuthData: (req, res, next) => {
@@ -42,7 +43,7 @@ module.exports = {
 
     checkAccessToken: async (req, res, next) => {
         try {
-            const access_token = req.get('Authorization');
+            const access_token = req.get(AUTHORIZATION);
 
             if (!access_token) {
                 throw new ErrorHandler(NOT_VALID_TOKEN.code, NOT_VALID_TOKEN.message);
@@ -69,7 +70,7 @@ module.exports = {
 
     checkRefreshToken: async (req, res, next) => {
         try {
-            const refresh_token = req.get('Authorization');
+            const refresh_token = req.get(AUTHORIZATION);
 
             if (!refresh_token) {
                 throw new ErrorHandler(NOT_VALID_TOKEN.code, NOT_VALID_TOKEN.message);

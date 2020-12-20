@@ -1,6 +1,6 @@
 const {
     BAD_REQUEST, NOT_FOUND, CONFLICT, UNAUTHORIZED, FORBIDDEN
-} = require('../../configs/error-codes');
+} = require('../../constants/error-codes');
 
 module.exports = {
     NOT_VALID_BODY: {
