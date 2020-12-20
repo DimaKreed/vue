@@ -2,6 +2,12 @@ const db = require('../database').getInstance();
 
 module.exports = {
 
+    createUser: (user) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.create(user);
+    },
+
     getUsers: () => {
         const CarModel = db.getModel('Car');
         const UserModel = db.getModel('User');
@@ -25,11 +31,18 @@ module.exports = {
             include: CarModel
         });
     },
-    createUser: (user) => {
-        const UserModel = db.getModel('User');
 
-        return UserModel.create(user);
+    updateUser: (userId, user) => {
+        console.log(userId);
+        console.log(user);
+
+        const UserModel = db.getModel('User');
+        return UserModel.update(
+            { ...user },
+            { returning: true, where: { id: userId } }
+        );
     },
+
     deleteUser: (userId) => {
         const UserModel = db.getModel('User');
         return UserModel.destroy({
@@ -44,16 +57,6 @@ module.exports = {
             where: {},
             truncate: true
         });
-    },
-    updateUser: (userId, user) => {
-        console.log(userId);
-        console.log(user);
-
-        const UserModel = db.getModel('User');
-        return UserModel.update(
-            { ...user },
-            { returning: true, where: { id: userId } }
-        );
     },
 
     normalizeUser: (user) => {

@@ -15,7 +15,6 @@ module.exports = {
             next(e);
         }
     },
-
     checkUserIdValidity: (req, res, next) => {
         try {
             const { error } = usersIdValidator.validate(req.params);
@@ -26,6 +25,7 @@ module.exports = {
             next(e);
         }
     },
+
     checkIsUsersGot: async (req, res, next) => {
         try {
             const users = await usersService.getUsers();
@@ -49,24 +49,6 @@ module.exports = {
                 const userByParams = await usersService.getUserByParams(req.body);
                 if (!userByParams) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
                 req.user = userByParams;
-            }
-
-            next();
-        } catch (e) {
-            next(e);
-        }
-    },
-    normalizeUser: (req, res, next) => {
-        try {
-            const { users, user } = req;
-
-            if (users) {
-                users.forEach((user1) => { usersService.normalizeUser(user1); });
-                req.users = users;
-            }
-            if (user) {
-                user.forEach((user1) => { usersService.normalizeUser(user1); });
-                req.user = user;
             }
 
             next();
@@ -106,6 +88,25 @@ module.exports = {
         try {
             const { user, userInDB } = req;
             passwordHasher.compare(user.password, userInDB.password);
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    normalizeUser: (req, res, next) => {
+        try {
+            const { users, user } = req;
+
+            if (users) {
+                users.forEach((user1) => { usersService.normalizeUser(user1); });
+                req.users = users;
+            }
+            if (user) {
+                user.forEach((user1) => { usersService.normalizeUser(user1); });
+                req.user = user;
+            }
+
             next();
         } catch (e) {
             next(e);

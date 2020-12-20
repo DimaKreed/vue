@@ -4,22 +4,9 @@ const {
         OK, UPDATED, DELETED, CREATED
     }
 } = require('../database/success');
-const { ErrorHandler, errors: { AlREADY_EXISTS,NOT_FOUND } } = require('../database/errors');
+const { ErrorHandler, errors: { AlREADY_EXISTS, NOT_FOUND } } = require('../database/errors');
 
 module.exports = {
-    getCars: (req, res, next) => {
-        try {
-            res.status(OK.code).json(req.cars);
-        } catch (e) { next(e); }
-    },
-
-    getCar: (req, res, next) => {
-        try {
-            res.status(OK.code).json(req.car);
-        } catch (e) { next(e); }
-    },
-
-
     createCar: async (req, res, next) => {
         try {
             if (req.car_is_present) throw new ErrorHandler(AlREADY_EXISTS.code, AlREADY_EXISTS.message);
@@ -31,13 +18,14 @@ module.exports = {
         } catch (e) { next(e); }
     },
 
-    deleteCar: async (req, res, next) => {
+    getCars: (req, res, next) => {
         try {
-            if( !req.car_is_present) throw new ErrorHandler(NOT_FOUND.code,NOT_FOUND.message);
-
-            await carsService.deleteCar(req.carInDB.id);
-
-            res.status(DELETED.code).json(DELETED.message);
+            res.status(OK.code).json(req.cars);
+        } catch (e) { next(e); }
+    },
+    getCar: (req, res, next) => {
+        try {
+            res.status(OK.code).json(req.car);
         } catch (e) { next(e); }
     },
 
@@ -52,6 +40,16 @@ module.exports = {
 
             res.status(UPDATED.code)
                 .json(UPDATED.message);
+        } catch (e) { next(e); }
+    },
+
+    deleteCar: async (req, res, next) => {
+        try {
+            if (!req.car_is_present) throw new ErrorHandler(NOT_FOUND.code, NOT_FOUND.message);
+
+            await carsService.deleteCar(req.carInDB.id);
+
+            res.status(DELETED.code).json(DELETED.message);
         } catch (e) { next(e); }
     }
 };

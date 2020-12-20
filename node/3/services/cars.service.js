@@ -4,6 +4,15 @@ const { ErrorHandler, errorCodes: { BAD_REQUEST } } = require('../database/error
 
 module.exports = {
 
+    createCar: (car) => {
+        const CarModel = db.getModel('Car');
+        const { error } = carsValidator.validate(car);
+
+        if (error) { throw new ErrorHandler(BAD_REQUEST, error.details[0].message); }
+
+        return CarModel.create(car);
+    },
+
     getCars: () => {
         const CarModel = db.getModel('Car');
         return CarModel.findAll();
@@ -19,14 +28,15 @@ module.exports = {
             where: param
         });
     },
-    createCar: (car) => {
+
+    updateCar: (carId, car) => {
         const CarModel = db.getModel('Car');
-        const { error } = carsValidator.validate(car);
-
-        if (error) { throw new ErrorHandler(BAD_REQUEST, error.details[0].message); }
-
-        return CarModel.create(car);
+        return CarModel.update(
+          { ...car },
+          { returning: true, where: { id: carId } }
+        );
     },
+
     deleteCar: (carId) => {
         const CarModel = db.getModel('Car');
         return CarModel.destroy({
@@ -41,14 +51,6 @@ module.exports = {
             where: {},
             truncate: true
         });
-    },
-
-    updateCar: (carId, car) => {
-        const CarModel = db.getModel('Car');
-        return CarModel.update(
-            { ...car },
-            { returning: true, where: { id: carId } }
-        );
     }
 
 };
